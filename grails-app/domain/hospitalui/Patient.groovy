@@ -2,14 +2,21 @@ package hospitalui
 
 class Patient extends Person{
 
-	String OHIP;
-	String SIN;
+	String ohip;
+	String sin;
 	String homePhone;
 	String healthCondition;
 	Date lastVisitedDate;
 	int numOfVisits;
-	Doctor doctorId;
+	
+	static belongsTo = [doctor: Doctor]
 	
     static constraints = {
+		ohip unique:true;
+		sin unique:true;
+		homePhone nullable:true;
+		healthCondition nullable:true;
+		lastVisitedDate nullable:true;
+		numOfVisits nullable:true;
     }
 }

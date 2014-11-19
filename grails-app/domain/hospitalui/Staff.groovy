@@ -5,5 +5,6 @@ class Staff extends Person{
 	static hasMany = [doctors: Doctor];
 	
     static constraints = {
+		doctors: nullable:true;
     }
 }
