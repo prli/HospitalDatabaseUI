@@ -7,4 +7,10 @@ class Staff extends Person{
     static constraints = {
 		doctors: nullable:true;
     }
+	
+	static mapping = {
+		version false
+		table 'Staff'
+		id column: 'UserId'
+	}
 }

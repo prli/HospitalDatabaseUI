@@ -86,15 +86,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${patientInstance?.doctor}">
-				<li class="fieldcontain">
-					<span id="doctor-label" class="property-label"><g:message code="patient.doctor.label" default="Doctor" /></span>
-					
-						<span class="property-value" aria-labelledby="doctor-label"><g:link controller="doctor" action="show" id="${patientInstance?.doctor?.id}">${patientInstance?.doctor?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${patientInstance?.firstName}">
 				<li class="fieldcontain">
 					<span id="firstName-label" class="property-label"><g:message code="patient.firstName.label" default="First Name" /></span>

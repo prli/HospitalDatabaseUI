@@ -8,10 +8,17 @@ class Person {
 	String password;
 	
     static constraints = {
-		userId unique: true;
+		userId unique:true
     }
 	
 	static mapping = {
 		tablePerHierarchy false
+		version false
+		table 'Person'
+		id column: 'UserId', name: 'userId'
+		userId column: 'UserId'
+		firstName column: 'FirstName'
+		lastName column: 'LastName'
+		password column: 'Password'
 	}
 }

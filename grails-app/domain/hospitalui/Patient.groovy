@@ -9,7 +9,7 @@ class Patient extends Person{
 	Date lastVisitedDate;
 	int numOfVisits;
 	
-	static belongsTo = [doctor: Doctor]
+	//static belongsTo = [doctor: Doctor]
 	
     static constraints = {
 		ohip unique:true;
@@ -19,4 +19,16 @@ class Patient extends Person{
 		lastVisitedDate nullable:true;
 		numOfVisits nullable:true;
     }
+	
+	static mapping = {
+		version false
+		table 'Patient'
+		id column: 'UserId'
+		ohip column: 'OHIP'
+		sin column: 'SIN'
+		homePhone column: 'Phone'
+		healthCondition column: 'Current_health'
+		lastVisitedDate column: 'Last_visit_date'
+		numOfVisits column: 'Num_of_visits'
+	}
 }
