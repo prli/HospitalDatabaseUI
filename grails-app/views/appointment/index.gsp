@@ -42,7 +42,7 @@
 					
 						<td>${fieldValue(bean: appointmentInstance, field: "patient")}</td>
 					
-						<td>${fieldValue(bean: appointmentInstance, field: "startTime")}</td>
+						<td><g:formatDate date="${appointmentInstance.startTime}" /></td>
 					
 						<td>${fieldValue(bean: appointmentInstance, field: "status")}</td>
 					

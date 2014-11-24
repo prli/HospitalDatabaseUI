@@ -25,7 +25,7 @@
 		<g:message code="appointment.startTime.label" default="Start Time" />
 		<span class="required-indicator">*</span>
 	</label>
-	
+	<g:datePicker name="startTime" precision="day"  value="${appointmentInstance?.startTime}"  />
 
 </div>
 

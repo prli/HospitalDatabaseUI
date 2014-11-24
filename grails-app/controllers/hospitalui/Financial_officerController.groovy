@@ -25,6 +25,7 @@ class Financial_officerController {
 
     @Transactional
     def save(Financial_officer financial_officerInstance) {
+		financial_officerInstance.id = financial_officerInstance.firstName + financial_officerInstance.lastName
         if (financial_officerInstance == null) {
             notFound()
             return

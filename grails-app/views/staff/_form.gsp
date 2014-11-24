@@ -2,30 +2,12 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'userId', 'error')} required">
-	<label for="userId">
-		<g:message code="staff.userId.label" default="User Id" />
+<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'doctorId', 'error')} required">
+	<label for="doctorId">
+		<g:message code="staff.doctorId.label" default="Doctor Id" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="userId" required="" value="${staffInstance?.userId}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'doctor', 'error')} required">
-	<label for="doctor">
-		<g:message code="staff.doctor.label" default="Doctor" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="doctor" name="doctor.id" from="${hospitalui.Doctor.list()}" optionKey="id" required="" value="${staffInstance?.doctor?.id}" class="many-to-one"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'doctors', 'error')} ">
-	<label for="doctors">
-		<g:message code="staff.doctors.label" default="Doctors" />
-		
-	</label>
-	<g:select name="doctors" from="${hospitalui.Doctor.list()}" multiple="multiple" optionKey="id" size="5" value="${staffInstance?.doctors*.id}" class="many-to-many"/>
+	<g:textField name="doctorId" required="" value="${staffInstance?.doctorId}"/>
 
 </div>
 

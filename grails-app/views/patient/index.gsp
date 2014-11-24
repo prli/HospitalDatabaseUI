@@ -24,8 +24,6 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="userId" title="${message(code: 'patient.userId.label', default: 'User Id')}" />
-					
 						<g:sortableColumn property="ohip" title="${message(code: 'patient.ohip.label', default: 'Ohip')}" />
 					
 						<g:sortableColumn property="sin" title="${message(code: 'patient.sin.label', default: 'Sin')}" />
@@ -36,15 +34,15 @@
 					
 						<g:sortableColumn property="lastVisitedDate" title="${message(code: 'patient.lastVisitedDate.label', default: 'Last Visited Date')}" />
 					
+						<g:sortableColumn property="numOfVisits" title="${message(code: 'patient.numOfVisits.label', default: 'Num Of Visits')}" />
+					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${patientInstanceList}" status="i" var="patientInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "userId")}</g:link></td>
-					
-						<td>${fieldValue(bean: patientInstance, field: "ohip")}</td>
+						<td><g:link action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "ohip")}</g:link></td>
 					
 						<td>${fieldValue(bean: patientInstance, field: "sin")}</td>
 					
@@ -53,6 +51,8 @@
 						<td>${fieldValue(bean: patientInstance, field: "healthCondition")}</td>
 					
 						<td><g:formatDate date="${patientInstance.lastVisitedDate}" /></td>
+					
+						<td>${fieldValue(bean: patientInstance, field: "numOfVisits")}</td>
 					
 					</tr>
 				</g:each>

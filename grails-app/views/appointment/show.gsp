@@ -45,7 +45,7 @@
 				<li class="fieldcontain">
 					<span id="startTime-label" class="property-label"><g:message code="appointment.startTime.label" default="Start Time" /></span>
 					
-						<span class="property-value" aria-labelledby="startTime-label"><g:fieldValue bean="${appointmentInstance}" field="startTime"/></span>
+						<span class="property-value" aria-labelledby="startTime-label"><g:formatDate date="${appointmentInstance?.startTime}" /></span>
 					
 				</li>
 				</g:if>

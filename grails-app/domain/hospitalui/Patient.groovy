@@ -23,7 +23,7 @@ class Patient extends Person{
 	static mapping = {
 		version false
 		table 'Patient'
-		id column: 'UserId', name: 'userId', generator: 'assigned'
+		id column: 'UserId'
 		ohip column: 'OHIP'
 		sin column: 'SIN'
 		homePhone column: 'Phone'

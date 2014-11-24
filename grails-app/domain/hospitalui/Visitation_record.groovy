@@ -4,8 +4,8 @@ import java.util.Formatter.DateTime
 
 class Visitation_record implements Serializable{
 
-	Patient patient
-	Doctor doctor
+	String patientId
+	String doctorId
 	String procedures
 	String diagnosis
 	String prescription
@@ -21,9 +21,9 @@ class Visitation_record implements Serializable{
 	static mapping = {
 		version false
 		table 'Visitation_Record'
-		id composite: ['patient', 'dateOfVisit']
-		patient column: 'Patient'
-		doctor column: 'doctorId'
+		id composite: ['patientId', 'dateOfVisit']
+		patientId column: 'PatientId'
+		doctorId column: 'DoctorId'
 		procedures column: 'Procecures'
 		diagnosis column: 'Diagnosis'
 		prescription column: 'Prescription'
