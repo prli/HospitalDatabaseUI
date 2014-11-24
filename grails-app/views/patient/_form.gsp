@@ -65,6 +65,15 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'doctor', 'error')} required">
+	<label for="doctor">
+		<g:message code="patient.doctor.label" default="Doctor" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="doctor" name="doctor.id" from="${hospitalui.Doctor.list()}" optionKey="id" required="" value="${patientInstance?.doctor?.id}" class="many-to-one"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">
 		<g:message code="patient.firstName.label" default="First Name" />

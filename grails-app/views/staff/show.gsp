@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${staffInstance?.doctor}">
+				<li class="fieldcontain">
+					<span id="doctor-label" class="property-label"><g:message code="staff.doctor.label" default="Doctor" /></span>
+					
+						<span class="property-value" aria-labelledby="doctor-label"><g:link controller="doctor" action="show" id="${staffInstance?.doctor?.id}">${staffInstance?.doctor?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${staffInstance?.doctors}">
 				<li class="fieldcontain">
 					<span id="doctors-label" class="property-label"><g:message code="staff.doctors.label" default="Doctors" /></span>

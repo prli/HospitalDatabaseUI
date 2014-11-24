@@ -2,6 +2,7 @@ package hospitalui
 
 class Person {
 	
+	String id = userId
 	String userId;
 	String firstName;
 	String lastName;
@@ -15,7 +16,7 @@ class Person {
 		tablePerHierarchy false
 		version false
 		table 'Person'
-		id column: 'UserId', name: 'userId'
+		id column: 'UserId', name: 'userId', generator: 'assigned'
 		userId column: 'UserId'
 		firstName column: 'FirstName'
 		lastName column: 'LastName'

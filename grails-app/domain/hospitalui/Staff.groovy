@@ -2,6 +2,7 @@ package hospitalui
 
 class Staff extends Person{
 
+	Doctor doctor;
 	static hasMany = [doctors: Doctor];
 	
     static constraints = {
@@ -11,6 +12,7 @@ class Staff extends Person{
 	static mapping = {
 		version false
 		table 'Staff'
-		id column: 'UserId'
+		id column: 'UserId', name: 'userId', generator: 'assigned'
+		doctor column: 'doctorId'
 	}
 }
