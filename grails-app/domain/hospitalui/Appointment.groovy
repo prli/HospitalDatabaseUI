@@ -2,11 +2,11 @@ package hospitalui
 
 import java.util.Formatter.DateTime
 
-class Appointment {
+class Appointment implements Serializable{
 	
 	String id
 	Patient patient
-	DateTime startTime
+	Date startTime
 	int duration
 	String status
 	

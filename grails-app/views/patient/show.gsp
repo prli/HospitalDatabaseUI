@@ -86,11 +86,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${patientInstance?.doctor}">
+				<g:if test="${patientInstance?.doctorId}">
 				<li class="fieldcontain">
-					<span id="doctor-label" class="property-label"><g:message code="patient.doctor.label" default="Doctor" /></span>
+					<span id="doctorId-label" class="property-label"><g:message code="patient.doctorId.label" default="Doctor Id" /></span>
 					
-						<span class="property-value" aria-labelledby="doctor-label"><g:link controller="doctor" action="show" id="${patientInstance?.doctor?.id}">${patientInstance?.doctor?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="doctorId-label"><g:fieldValue bean="${patientInstance}" field="doctorId"/></span>
 					
 				</li>
 				</g:if>

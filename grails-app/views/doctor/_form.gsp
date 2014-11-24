@@ -38,3 +38,12 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: doctorInstance, field: 'revenue', 'error')} required">
+	<label for="revenue">
+		<g:message code="doctor.revenue.label" default="Revenue" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="revenue" value="${fieldValue(bean: doctorInstance, field: 'revenue')}" required=""/>
+
+</div>
+

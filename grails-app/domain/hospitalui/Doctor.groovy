@@ -2,6 +2,8 @@ package hospitalui
 
 class Doctor extends Person{
 	
+	double revenue
+	
     static constraints = {
     }
 	
@@ -9,6 +11,7 @@ class Doctor extends Person{
 		version false
 		table 'Doctor'
 		id column: 'UserId', name: 'userId', generator: 'assigned'
+		revenue column: 'Revenue'
 	}
 	
 }

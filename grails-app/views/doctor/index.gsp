@@ -32,19 +32,23 @@
 					
 						<g:sortableColumn property="password" title="${message(code: 'doctor.password.label', default: 'Password')}" />
 					
+						<g:sortableColumn property="revenue" title="${message(code: 'doctor.revenue.label', default: 'Revenue')}" />
+					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${doctorInstanceList}" status="i" var="doctorInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${doctorInstance.id}">${fieldValue(bean: doctorInstance, field: "userId")}</g:link></td>
+						<td><g:link action="show" id="${doctorInstance.userId}">${fieldValue(bean: doctorInstance, field: "userId")}</g:link></td>
 					
 						<td>${fieldValue(bean: doctorInstance, field: "firstName")}</td>
 					
 						<td>${fieldValue(bean: doctorInstance, field: "lastName")}</td>
 					
 						<td>${fieldValue(bean: doctorInstance, field: "password")}</td>
+					
+						<td>${fieldValue(bean: doctorInstance, field: "revenue")}</td>
 					
 					</tr>
 				</g:each>

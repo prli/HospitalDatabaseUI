@@ -59,11 +59,23 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${doctorInstance?.revenue}">
+				<li class="fieldcontain">
+					<span id="revenue-label" class="property-label"><g:message code="doctor.revenue.label" default="Revenue" /></span>
+					
+						<span class="property-value" aria-labelledby="revenue-label"><g:fieldValue bean="${doctorInstance}" field="revenue"/></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:doctorInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${doctorInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:link class="edit" action="edit" resource="${doctorInstance}" id="${doctorInstance.userId}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:link class="delete" action="delete"id="${doctorInstance.userId}"><g:message code="default.button.delete.label" default="Delete" /></g:link>
+					
+<%--					<g:link class="edit" action="edit" resource="${doctorInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>--%>
+<%--					<g:actionSubmit class="delete" action="delete" id="${doctorInstance.userId}" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />--%>
 				</fieldset>
 			</g:form>
 		</div>

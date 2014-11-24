@@ -2,7 +2,7 @@ package hospitalui
 
 import java.util.Formatter.DateTime
 
-class Visitation_record {
+class Visitation_record implements Serializable{
 
 	Patient patient
 	Doctor doctor
@@ -13,7 +13,7 @@ class Visitation_record {
 	double costOfVisit
 	double lengthOfVisit
 	String comments
-	DateTime dateOfVisit
+	Date dateOfVisit
 	
     static constraints = {
     }
@@ -21,6 +21,7 @@ class Visitation_record {
 	static mapping = {
 		version false
 		table 'Visitation_Record'
+		id composite: ['patient', 'dateOfVisit']
 		patient column: 'Patient'
 		doctor column: 'doctorId'
 		procedures column: 'Procecures'

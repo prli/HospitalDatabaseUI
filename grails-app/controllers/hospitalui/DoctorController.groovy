@@ -25,6 +25,7 @@ class DoctorController {
 
     @Transactional
     def save(Doctor doctorInstance) {
+		doctorInstance.id = doctorInstance.userId
         if (doctorInstance == null) {
             notFound()
             return
@@ -47,6 +48,7 @@ class DoctorController {
     }
 
     def edit(Doctor doctorInstance) {
+		doctorInstance.id = doctorInstance.userId
         respond doctorInstance
     }
 
@@ -75,7 +77,7 @@ class DoctorController {
 
     @Transactional
     def delete(Doctor doctorInstance) {
-
+		doctorInstance.id = doctorInstance.userId
         if (doctorInstance == null) {
             notFound()
             return

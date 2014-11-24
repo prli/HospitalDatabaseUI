@@ -2,8 +2,7 @@ package hospitalui
 
 class Staff extends Person{
 
-	Doctor doctor;
-	static hasMany = [doctors: Doctor];
+	String doctorId;
 	
     static constraints = {
 		doctors: nullable:true;
@@ -13,6 +12,6 @@ class Staff extends Person{
 		version false
 		table 'Staff'
 		id column: 'UserId', name: 'userId', generator: 'assigned'
-		doctor column: 'doctorId'
+		doctorId column: 'doctorId'
 	}
 }

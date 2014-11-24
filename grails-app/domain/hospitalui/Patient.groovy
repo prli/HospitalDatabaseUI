@@ -9,8 +9,7 @@ class Patient extends Person{
 	Date lastVisitedDate;
 	int numOfVisits;
 	
-	Doctor doctor;
-	static belongsTo = [doctor: Doctor]
+	String doctorId;
 	
     static constraints = {
 		ohip unique:true;
@@ -31,6 +30,6 @@ class Patient extends Person{
 		healthCondition column: 'Current_health'
 		lastVisitedDate column: 'Last_visit_date'
 		numOfVisits column: 'Num_of_visits'
-		doctor column: 'DoctorId'
+		doctorId column: 'DoctorId'
 	}
 }
