@@ -36,6 +36,8 @@
 					
 						<g:sortableColumn property="numOfVisits" title="${message(code: 'patient.numOfVisits.label', default: 'Num Of Visits')}" />
 					
+						<th><g:message code="patient.doctor.label" default="Doctor" /></th>
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -53,6 +55,8 @@
 						<td><g:formatDate date="${patientInstance.lastVisitedDate}" /></td>
 					
 						<td>${fieldValue(bean: patientInstance, field: "numOfVisits")}</td>
+						
+						<td>${fieldValue(bean: patientInstance, field: "doctor")}</td>
 					
 					</tr>
 				</g:each>

@@ -9,7 +9,7 @@ class Patient extends Person{
 	Date lastVisitedDate;
 	int numOfVisits;
 	
-	String doctorId;
+	Doctor doctor;
 	
     static constraints = {
 		ohip unique:true;
@@ -30,6 +30,10 @@ class Patient extends Person{
 		healthCondition column: 'Current_health'
 		lastVisitedDate column: 'Last_visit_date'
 		numOfVisits column: 'Num_of_visits'
-		doctorId column: 'DoctorId'
+		doctor column: 'DoctorId'
+	}
+	
+	public void setDoctor(String doctorId){
+		this.doctor = Doctor.findById(doctorId)
 	}
 }

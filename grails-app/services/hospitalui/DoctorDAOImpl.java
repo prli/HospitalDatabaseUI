@@ -131,7 +131,7 @@ public class DoctorDAOImpl {
 		    	p.setSin(rs.getString("SIN"));
 		    	p.setOhip(rs.getString("OHIP"));
 		    	p.setHomePhone(rs.getString("Phone"));
-		    	p.setDoctorId(rs.getString("DoctorId"));
+		    	p.setDoctor(rs.getString("DoctorId"));
 		    	p.setHealthCondition(rs.getString("Current_health"));
 		    	p.setLastVisitedDate(rs.getDate("Last_visit_date"));
 		    	p.setNumOfVisits(rs.getInt("Num_of_visits"));

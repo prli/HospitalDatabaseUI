@@ -5,7 +5,7 @@ import java.util.Formatter.DateTime
 class Appointment implements Serializable{
 	
 	String id
-	String patientId
+	Patient patient
 	Date startTime
 	int duration
 	String status
@@ -16,8 +16,8 @@ class Appointment implements Serializable{
 	static mapping = {
 		version false
 		table 'Appointment'
-		id composite: ['patientId', 'startTime']
-		patientId column: 'PatientId'
+		id composite: ['patient', 'startTime']
+		patient column: 'PatientId'
 		startTime column: 'Date_Time'
 		duration column: 'Duration'
 		status column: 'Status'

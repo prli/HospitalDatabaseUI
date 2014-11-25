@@ -1,11 +1,12 @@
 package hospitalui
 
-import java.util.Formatter.DateTime
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 class Visitation_record implements Serializable{
 
-	String patientId
-	String doctorId
+	String id
+	Patient patient
+	Doctor doctor
 	String procedures
 	String diagnosis
 	String prescription
@@ -21,10 +22,10 @@ class Visitation_record implements Serializable{
 	static mapping = {
 		version false
 		table 'Visitation_Record'
-		id composite: ['patientId', 'dateOfVisit']
-		patientId column: 'PatientId'
-		doctorId column: 'DoctorId'
-		procedures column: 'Procecures'
+		id composite: ['patient', 'dateOfVisit'], generator: 'increment'
+		patient column: 'PatientId'
+		doctor column: 'DoctorId'
+		procedures column: 'Procedures'
 		diagnosis column: 'Diagnosis'
 		prescription column: 'Prescription'
 		scheduleOfTreatment column: 'Schedule_of_treatment'
@@ -32,5 +33,20 @@ class Visitation_record implements Serializable{
 		lengthOfVisit column: 'Length_of_visit'
 		comments column: 'Comments'
 		dateOfVisit column: 'Date_of_visit'
+	}
+	
+	boolean equals(other) {
+		if (!(other instanceof Visitation_record)) {
+			return false
+		}
+
+		other.patient == patient && other.dateOfVisit == dateOfVisit
+	}
+
+	int hashCode() {
+		def builder = new HashCodeBuilder()
+		builder.append patient
+		builder.append patient
+		builder.toHashCode()
 	}
 }

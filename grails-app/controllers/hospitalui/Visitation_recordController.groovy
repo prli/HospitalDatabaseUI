@@ -11,10 +11,20 @@ class Visitation_recordController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Visitation_record.list(params), model:[visitation_recordInstanceCount: Visitation_record.count()]
+        params.max = Math.min(max ?: 10, 100)	
+        render(view:"index",  model:[visitation_recordInstanceList: Visitation_record.list(params), visitation_recordInstanceCount: Visitation_record.count()])
     }
-
+	
+	def showForDoctorOrStaffOrFO(String doctorId){
+		def records = Visitation_record.findByDoctor(doctorId)
+		render(view:"index",  model:[visitation_recordInstanceList: records, visitation_recordInstanceCount: records.size()])
+	}
+	
+	def showForPatient(String patientId){
+		def records = Visitation_record.findByPatient(patientId)
+		render(view:"index",  model:[visitation_recordInstanceList: records, visitation_recordInstanceCount: records.size()])
+	}
+	
     def show(Visitation_record visitation_recordInstance) {
         respond visitation_recordInstance
     }
@@ -25,6 +35,7 @@ class Visitation_recordController {
 
     @Transactional
     def save(Visitation_record visitation_recordInstance) {
+		visitation_recordInstance.id = ''
         if (visitation_recordInstance == null) {
             notFound()
             return

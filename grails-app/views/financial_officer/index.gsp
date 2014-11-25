@@ -74,7 +74,7 @@
 							<g:each in="${doctorInstanceList}" status="i" var="doctorInstance">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 							
-								<td><g:link action="show" id="${doctorInstance.id}">${doctorInstance.id}</g:link></td>
+								<td><g:link controller="visitation_record" action="index" id="${doctorInstance.id}">${doctorInstance.id}</g:link></td>
 								
 								<td>${doctorInstance.firstName}</td>
 		
