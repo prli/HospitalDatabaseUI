@@ -12,8 +12,10 @@ class DoctorController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def patients = Patient.findAllByDoctorId("PeiLi")
-        render(view: "index", model: [doctorInstanceCount: Doctor.count(), doctorInstanceList: Doctor.list(params), patientInstanceList: patients])
+		def userId = "PeiLi"
+		def patients = Patient.findAllByDoctorId(userId)
+		def doctor = Doctor.findById(userId)
+        render(view: "index", model: [patientInstanceCount: patients.size() , doctorInstance: doctor, patientInstanceList: patients])
     }
 	
 	def searchPatient(){

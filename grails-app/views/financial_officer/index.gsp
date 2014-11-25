@@ -23,6 +23,7 @@
 			<table>
 			<thead>
 					<tr>
+						<g:sortableColumn property="userId" title="${message(code: 'financial_officer.userId.label', default: 'User Id')}" />
 					
 						<g:sortableColumn property="firstName" title="${message(code: 'financial_officer.firstName.label', default: 'First Name')}" />
 					
@@ -33,21 +34,63 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${financial_officerInstanceList}" status="i" var="financial_officerInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${financial_officerInstance.id}">${fieldValue(bean: financial_officerInstance, field: "firstName")}</g:link></td>
-					
-						<td>${fieldValue(bean: financial_officerInstance, field: "lastName")}</td>
-					
-						<td>${fieldValue(bean: financial_officerInstance, field: "password")}</td>
-					
+					<tr class="">
+						<td><g:link action="show" id="${financialOfficerInstance.id}">${financialOfficerInstance.id}</g:link></td>
+						<td>${financialOfficerInstance.firstName}</td>
+						<td>${financialOfficerInstance.lastName}</td>
+						<td>${financialOfficerInstance.password}</td>
 					</tr>
-				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${financial_officerInstanceCount ?: 0}" />
+
+			<div id="searchDoctor">
+				<h1>Search Doctor</h1>
+				<table>
+					<g:formRemote name="searchDoctor" url="[controller: 'financial_officer', action:'searchDoctor']">
+					    <tr><td>Doctor Id: <input name="doctorId" type="text" /></td></tr>
+					    <tr><td>First Name: <input name="firstName" type="text" /></td></tr>
+					    <tr><td>Last Name: <input name="lastName" type="text" /></td></tr>
+					    <tr><td><g:submitButton name="search" value="search" /></td></tr>
+					</g:formRemote>
+				</table>
+			</div>
+			<div id="listOfDoctor">
+				<table>
+					<thead>
+							<tr>
+								<g:sortableColumn property="id" title="${message(code: 'doctor.userId.label', default: 'User Id')}" />
+							
+								<g:sortableColumn property="firstName" title="${message(code: 'doctor.firstName.label', default: 'First Name')}" />
+							
+								<g:sortableColumn property="lastName" title="${message(code: 'doctor.lastName.label', default: 'Last Name')}" />
+							
+								<g:sortableColumn property="password" title="${message(code: 'doctor.password.label', default: 'Password')}" />
+							
+								<g:sortableColumn property="revenue" title="${message(code: 'doctor.revenue.label', default: 'Revenue')}" />
+							
+							</tr>
+						</thead>
+						<tbody>
+							<g:each in="${doctorInstanceList}" status="i" var="doctorInstance">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							
+								<td><g:link action="show" id="${doctorInstance.id}">${doctorInstance.id}</g:link></td>
+								
+								<td>${doctorInstance.firstName}</td>
+		
+								<td>${doctorInstance.lastName}</td>
+							
+								<td>${doctorInstance.password}</td>
+							
+								<td>${doctorInstance.revenue}</td>
+							
+							</tr>
+							</g:each>
+						</tbody>
+					</table>
+				<div class="pagination">
+					<g:paginate total="${doctorInstanceCount ?: 0}" />
+				</div>
 			</div>
 		</div>
 	</body>

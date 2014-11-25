@@ -23,6 +23,7 @@
 			<table>
 			<thead>
 					<tr>
+						<g:sortableColumn property="id" title="${message(code: 'doctor.userId.label', default: 'User Id')}" />
 					
 						<g:sortableColumn property="firstName" title="${message(code: 'doctor.firstName.label', default: 'First Name')}" />
 					
@@ -35,26 +36,24 @@
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${doctorInstanceList}" status="i" var="doctorInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<tr class="odd">
 					
-						<td><g:link action="show" id="${doctorInstance.id}">${fieldValue(bean: doctorInstance, field: "firstName")}</g:link></td>
+						<td><g:link action="show" id="${doctorInstance.id}">${doctorInstance.id}</g:link></td>
+						
+						<td>${doctorInstance.firstName}</td>
+
+						<td>${doctorInstance.lastName}</td>
 					
-						<td>${fieldValue(bean: doctorInstance, field: "lastName")}</td>
+						<td>${doctorInstance.password}</td>
 					
-						<td>${fieldValue(bean: doctorInstance, field: "password")}</td>
-					
-						<td>${fieldValue(bean: doctorInstance, field: "revenue")}</td>
+						<td>${doctorInstance.revenue}</td>
 					
 					</tr>
-				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${doctorInstanceCount ?: 0}" />
-			</div>
+
 			<div id="searchPatient">
-			<h1>Search Patient</h1>
+				<h1>Search Patient</h1>
 				<table>
 					<g:formRemote name="searchPatient"
 					              url="[controller: 'doctor', action:'searchPatient']">
@@ -80,14 +79,14 @@
 								<g:sortableColumn property="lastVisitedDate" title="${message(code: 'patient.lastVisitedDate.label', default: 'Last Visited Date')}" />
 							
 								<g:sortableColumn property="numOfVisits" title="${message(code: 'patient.numOfVisits.label', default: 'Num Of Visits')}" />
-							
+								<td></td>
 							</tr>
 					</thead>
 					<tbody>
 						<g:each in="${patientInstanceList}" status="i" var="patientInstance">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 							
-								<td><g:link action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "ohip")}</g:link></td>
+								<td><g:link controller="patient" action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "ohip")}</g:link></td>
 							
 								<td>${fieldValue(bean: patientInstance, field: "sin")}</td>
 							
@@ -98,11 +97,22 @@
 								<td><g:formatDate date="${patientInstance.lastVisitedDate}" /></td>
 							
 								<td>${fieldValue(bean: patientInstance, field: "numOfVisits")}</td>
+								
+								<td>
+									<g:formRemote name="modifyAccess" url="[controller: 'permission', action:'index']">
+										<g:hiddenField name="patientId" value="${patientInstance.id}" />
+										<g:hiddenField name="doctorId" value="${doctorInstance.id}" />
+										<g:submitButton name="modifyAccess" value="modify access" />
+									</g:formRemote>
+								</td>
 							
 							</tr>
 						</g:each>
 					</tbody>
 				</table>
+				<div class="pagination">
+					<g:paginate total="${patientInstanceCount ?: 0}" />
+				</div>
 			</div>
 		</div>
 	</body>
