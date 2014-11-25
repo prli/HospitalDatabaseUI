@@ -46,7 +46,7 @@
 					
 						<td>${fieldValue(bean: visitation_recordInstance, field: "costOfVisit")}</td>
 					
-						<td>${fieldValue(bean: visitation_recordInstance, field: "dateOfVisit")}</td>
+						<td><g:formatDate date="${visitation_recordInstance.dateOfVisit}" /></td>
 					
 						<td>${fieldValue(bean: visitation_recordInstance, field: "diagnosis")}</td>
 					

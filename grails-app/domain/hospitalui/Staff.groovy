@@ -11,7 +11,7 @@ class Staff extends Person{
 	static mapping = {
 		version false
 		table 'Staff'
-		id column: 'UserId', name: 'userId', generator: 'assigned'
+		id column: 'UserId'
 		doctorId column: 'doctorId'
 	}
 }

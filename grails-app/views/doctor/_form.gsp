@@ -1,16 +1,5 @@
 <%@ page import="hospitalui.Doctor" %>
 
-
-
-<div class="fieldcontain ${hasErrors(bean: doctorInstance, field: 'userId', 'error')} required">
-	<label for="userId">
-		<g:message code="doctor.userId.label" default="User Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="userId" required="" value="${doctorInstance?.userId}"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: doctorInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">
 		<g:message code="doctor.firstName.label" default="First Name" />

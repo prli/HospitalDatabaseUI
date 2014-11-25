@@ -45,7 +45,7 @@
 				<li class="fieldcontain">
 					<span id="dateOfVisit-label" class="property-label"><g:message code="visitation_record.dateOfVisit.label" default="Date Of Visit" /></span>
 					
-						<span class="property-value" aria-labelledby="dateOfVisit-label"><g:fieldValue bean="${visitation_recordInstance}" field="dateOfVisit"/></span>
+						<span class="property-value" aria-labelledby="dateOfVisit-label"><g:formatDate date="${visitation_recordInstance?.dateOfVisit}" /></span>
 					
 				</li>
 				</g:if>

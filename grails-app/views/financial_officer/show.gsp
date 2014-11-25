@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list financial_officer">
 			
-				<g:if test="${financial_officerInstance?.userId}">
-				<li class="fieldcontain">
-					<span id="userId-label" class="property-label"><g:message code="financial_officer.userId.label" default="User Id" /></span>
-					
-						<span class="property-value" aria-labelledby="userId-label"><g:fieldValue bean="${financial_officerInstance}" field="userId"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${financial_officerInstance?.firstName}">
 				<li class="fieldcontain">
 					<span id="firstName-label" class="property-label"><g:message code="financial_officer.firstName.label" default="First Name" /></span>

@@ -25,7 +25,7 @@
 		<g:message code="visitation_record.dateOfVisit.label" default="Date Of Visit" />
 		<span class="required-indicator">*</span>
 	</label>
-	
+	<g:datePicker name="dateOfVisit" precision="day"  value="${visitation_recordInstance?.dateOfVisit}"  />
 
 </div>
 

@@ -8,6 +8,6 @@ class Financial_officer extends Person{
 	static mapping = {
 		version false
 		table 'Financial_Officer'
-		id column: 'UserId', name: 'userId', generator: 'assigned'
+		id column: 'UserId'
 	}
 }

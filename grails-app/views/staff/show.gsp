@@ -23,31 +23,11 @@
 			</g:if>
 			<ol class="property-list staff">
 			
-				<g:if test="${staffInstance?.userId}">
+				<g:if test="${staffInstance?.doctorId}">
 				<li class="fieldcontain">
-					<span id="userId-label" class="property-label"><g:message code="staff.userId.label" default="User Id" /></span>
+					<span id="doctorId-label" class="property-label"><g:message code="staff.doctorId.label" default="Doctor Id" /></span>
 					
-						<span class="property-value" aria-labelledby="userId-label"><g:fieldValue bean="${staffInstance}" field="userId"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${staffInstance?.doctor}">
-				<li class="fieldcontain">
-					<span id="doctor-label" class="property-label"><g:message code="staff.doctor.label" default="Doctor" /></span>
-					
-						<span class="property-value" aria-labelledby="doctor-label"><g:link controller="doctor" action="show" id="${staffInstance?.doctor?.id}">${staffInstance?.doctor?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${staffInstance?.doctors}">
-				<li class="fieldcontain">
-					<span id="doctors-label" class="property-label"><g:message code="staff.doctors.label" default="Doctors" /></span>
-					
-						<g:each in="${staffInstance.doctors}" var="d">
-						<span class="property-value" aria-labelledby="doctors-label"><g:link controller="doctor" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
-						</g:each>
+						<span class="property-value" aria-labelledby="doctorId-label"><g:fieldValue bean="${staffInstance}" field="doctorId"/></span>
 					
 				</li>
 				</g:if>

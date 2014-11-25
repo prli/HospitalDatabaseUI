@@ -2,15 +2,6 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: financial_officerInstance, field: 'userId', 'error')} required">
-	<label for="userId">
-		<g:message code="financial_officer.userId.label" default="User Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="userId" required="" value="${financial_officerInstance?.userId}"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: financial_officerInstance, field: 'firstName', 'error')} required">
 	<label for="firstName">
 		<g:message code="financial_officer.firstName.label" default="First Name" />

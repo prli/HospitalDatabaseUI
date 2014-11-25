@@ -25,6 +25,7 @@ class StaffController {
 
     @Transactional
     def save(Staff staffInstance) {
+		staffInstance.id = staffInstance.firstName + staffInstance.lastName
         if (staffInstance == null) {
             notFound()
             return

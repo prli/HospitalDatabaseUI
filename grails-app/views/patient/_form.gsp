@@ -2,15 +2,6 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'userId', 'error')} required">
-	<label for="userId">
-		<g:message code="patient.userId.label" default="User Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="userId" required="" value="${patientInstance?.userId}"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: patientInstance, field: 'ohip', 'error')} required">
 	<label for="ohip">
 		<g:message code="patient.ohip.label" default="Ohip" />

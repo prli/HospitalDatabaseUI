@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list doctor">
 			
-				<g:if test="${doctorInstance?.userId}">
-				<li class="fieldcontain">
-					<span id="userId-label" class="property-label"><g:message code="doctor.userId.label" default="User Id" /></span>
-					
-						<span class="property-value" aria-labelledby="userId-label"><g:fieldValue bean="${doctorInstance}" field="userId"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${doctorInstance?.firstName}">
 				<li class="fieldcontain">
 					<span id="firstName-label" class="property-label"><g:message code="doctor.firstName.label" default="First Name" /></span>
@@ -71,11 +62,8 @@
 			</ol>
 			<g:form url="[resource:doctorInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${doctorInstance}" id="${doctorInstance.userId}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:link class="delete" action="delete"id="${doctorInstance.userId}"><g:message code="default.button.delete.label" default="Delete" /></g:link>
-					
-<%--					<g:link class="edit" action="edit" resource="${doctorInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>--%>
-<%--					<g:actionSubmit class="delete" action="delete" id="${doctorInstance.userId}" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />--%>
+					<g:link class="edit" action="edit" resource="${doctorInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
 		</div>

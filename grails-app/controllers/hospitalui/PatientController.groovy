@@ -25,6 +25,7 @@ class PatientController {
 
     @Transactional
     def save(Patient patientInstance) {
+		patientInstance.id = patientInstance.firstName + patientInstance.lastName
         if (patientInstance == null) {
             notFound()
             return
