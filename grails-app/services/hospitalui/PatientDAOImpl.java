@@ -130,8 +130,4 @@ public class PatientDAOImpl {
 		}
 		return rs;
 	}
-	
-	/*public void updateRecord(String date, String ID) {
-		
-	}*/
 }
