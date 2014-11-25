@@ -5,10 +5,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
 
 public class DoctorDAOImpl {
 	
 	Connection conn = null;
+	
+	public DoctorDAOImpl(){
+		try {
+			//conn = DriverManager.getConnection("jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli", "user_prli", "user_prli");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356db_prli", "root", "root");
+
+		    // Do something with the Connection
+		    System.out.println("Connection to MYSQL Database Sucessful!");
+		    
+		} catch (SQLException ex) {
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
+	}
 	
 	public boolean ConnectToDB() {
 
@@ -68,7 +85,7 @@ public class DoctorDAOImpl {
 		return rs;
 	}
 	
-	public ResultSet getPatient(String doctorID, String Phone, String Last_Visited_Date, String SIN, String NumOfVisits, String OHIP, String Current_Condition) {
+	public LinkedList getPatient(String doctorID, String Phone, String Last_Visited_Date, String SIN, String NumOfVisits, String OHIP, String Current_Condition) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
@@ -82,7 +99,7 @@ public class DoctorDAOImpl {
 				   query.append("AND Phone = '" + Phone + "' ");
 			   }
 			   if (Last_Visited_Date != null) {
-				   query.append("AND Last_visited_date = '" + Last_Visited_Date + "' ");
+				   query.append("AND Last_visit_date = '" + Last_Visited_Date + "' ");
 			   }
 			   if (SIN != null) {
 				   query.append("AND SIN = '" + SIN + "' ");
@@ -106,9 +123,21 @@ public class DoctorDAOImpl {
 		   rs = stmt.getResultSet();
 		    
 		    // Now do something with the ResultSet ....
+		   LinkedList patients = new LinkedList();
 		    while (rs.next()) {
-		    	System.out.println("Patient is "  + rs.getString("FirstName") + " " + rs.getString("LastName"));
+		    	Patient p = new Patient();
+		    	p.setId(rs.getString("UserId"));
+		    	p.setOhip(rs.getString("OHIP"));
+		    	p.setSin(rs.getString("SIN"));
+		    	p.setOhip(rs.getString("OHIP"));
+		    	p.setHomePhone(rs.getString("Phone"));
+		    	p.setDoctorId(rs.getString("DoctorId"));
+		    	p.setHealthCondition(rs.getString("Current_health"));
+		    	p.setLastVisitedDate(rs.getDate("Last_visit_date"));
+		    	p.setNumOfVisits(rs.getInt("Num_of_visits"));
+		    	patients.add(p);
 		    }
+		    return patients;
 		}
 		catch (SQLException ex) {
 		    // handle any errors
@@ -132,7 +161,7 @@ public class DoctorDAOImpl {
 			        stmt = null;
 			    }
 		}
-		return rs;
+		return null;
 	}
 	
 	public ResultSet getAssignedPatientsList(String beginDate, String endDate, String doctorID) {

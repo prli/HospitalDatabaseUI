@@ -53,6 +53,57 @@
 			<div class="pagination">
 				<g:paginate total="${doctorInstanceCount ?: 0}" />
 			</div>
+			<div id="searchPatient">
+			<h1>Search Patient</h1>
+				<table>
+					<g:formRemote name="searchPatient"
+					              url="[controller: 'doctor', action:'searchPatient']">
+					    <tr><td>OHIP: <input name="ohip" type="text" /></td></tr>
+					    <tr><td>SIN: <input name="sin" type="text" /></td></tr>
+					    <tr><td><g:submitButton name="search" value="search" /></td></tr>
+					</g:formRemote>
+				</table>
+			</div>
+			<div id="listOfPatient">
+				<table>
+					<thead>
+							<tr>
+							
+								<g:sortableColumn property="ohip" title="${message(code: 'patient.ohip.label', default: 'Ohip')}" />
+							
+								<g:sortableColumn property="sin" title="${message(code: 'patient.sin.label', default: 'Sin')}" />
+							
+								<g:sortableColumn property="homePhone" title="${message(code: 'patient.homePhone.label', default: 'Home Phone')}" />
+							
+								<g:sortableColumn property="healthCondition" title="${message(code: 'patient.healthCondition.label', default: 'Health Condition')}" />
+							
+								<g:sortableColumn property="lastVisitedDate" title="${message(code: 'patient.lastVisitedDate.label', default: 'Last Visited Date')}" />
+							
+								<g:sortableColumn property="numOfVisits" title="${message(code: 'patient.numOfVisits.label', default: 'Num Of Visits')}" />
+							
+							</tr>
+					</thead>
+					<tbody>
+						<g:each in="${patientInstanceList}" status="i" var="patientInstance">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							
+								<td><g:link action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "ohip")}</g:link></td>
+							
+								<td>${fieldValue(bean: patientInstance, field: "sin")}</td>
+							
+								<td>${fieldValue(bean: patientInstance, field: "homePhone")}</td>
+							
+								<td>${fieldValue(bean: patientInstance, field: "healthCondition")}</td>
+							
+								<td><g:formatDate date="${patientInstance.lastVisitedDate}" /></td>
+							
+								<td>${fieldValue(bean: patientInstance, field: "numOfVisits")}</td>
+							
+							</tr>
+						</g:each>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 </html>
