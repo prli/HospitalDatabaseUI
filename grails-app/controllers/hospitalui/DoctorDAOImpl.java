@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class Financial_OfficerDAOImpl {
+public class DoctorDAOImpl {
 	
 	Connection conn = null;
 	
@@ -15,7 +15,7 @@ public class Financial_OfficerDAOImpl {
 		try {
 			//conn = DriverManager.getConnection("jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli", "user_prli", "user_prli");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356_hospital", "root", "root");
-			
+
 		    // Do something with the Connection
 		    System.out.println("Connection to MYSQL Database Sucessful!");
 		    
@@ -68,17 +68,46 @@ public class Financial_OfficerDAOImpl {
 		return rs;
 	}
 	
-	public ResultSet getDoctorFromID(String doctorID) {
+	public ResultSet getPatient(String doctorID, String Phone, String Last_Visited_Date, String SIN, String NumOfVisits, String OHIP, String Current_Condition) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 		    stmt = (this.conn).createStatement();
-		    rs = stmt.executeQuery("SELECT * FROM Person WHERE PatientId ='" + doctorID + "'");
-		    rs = stmt.getResultSet();
+		    
+		   StringBuffer query = new StringBuffer(); 
+		   
+		   query.append("SELECT FirstName, LastName FROM Person WHERE UserId IN (SELECT UserId FROM Patient WHERE DoctorId = '" + doctorID + "'");
+		   if (Phone != null || Last_Visited_Date != null || SIN != null || NumOfVisits != null || OHIP != null || Current_Condition != null) {
+			   if (Phone != null) {
+				   query.append("AND Phone = '" + Phone + "' ");
+			   }
+			   if (Last_Visited_Date != null) {
+				   query.append("AND Last_visited_date = '" + Last_Visited_Date + "' ");
+			   }
+			   if (SIN != null) {
+				   query.append("AND SIN = '" + SIN + "' ");
+			   }
+			   if (NumOfVisits != null) {
+				   query.append("AND Num_of_visits = '" + NumOfVisits + "' ");
+			   }
+			   if (OHIP != null) {
+				   query.append("AND OHIP = '" + OHIP + "' ");
+			   }
+			   if (Current_Condition != null) {
+				   query.append("AND Current_health = '" + Current_Condition + "' ");
+			   }
+			   query.append(")"); // no error checking for all fields null
+		   }
+		   else {
+			   query.append(")");
+		   }
+		   
+		   rs = stmt.executeQuery(query.toString());
+		   rs = stmt.getResultSet();
 		    
 		    // Now do something with the ResultSet ....
 		    while (rs.next()) {
-		    	System.out.println("Doctor name is "  + rs.getString("FirstName") + " " + rs.getString("LastName"));
+		    	System.out.println("Patient is "  + rs.getString("FirstName") + " " + rs.getString("LastName"));
 		    }
 		}
 		catch (SQLException ex) {
