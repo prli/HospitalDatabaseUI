@@ -13,7 +13,7 @@ class DoctorController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 		def userId = "PeiLi"
-		def patients = Patient.findAllByDoctorId(userId)
+		def patients = Patient.findAllByDoctor(Doctor.findById(userId))
 		def doctor = Doctor.findById(userId)
         render(view: "index", model: [patientInstanceCount: patients.size() , doctorInstance: doctor, patientInstanceList: patients])
     }

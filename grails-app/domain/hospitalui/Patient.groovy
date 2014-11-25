@@ -8,7 +8,6 @@ class Patient extends Person{
 	String healthCondition;
 	Date lastVisitedDate;
 	int numOfVisits;
-	
 	Doctor doctor;
 	
     static constraints = {
@@ -33,7 +32,7 @@ class Patient extends Person{
 		doctor column: 'DoctorId'
 	}
 	
-	public void setDoctor(String doctorId){
+	public void setDoctorById(String doctorId){
 		this.doctor = Doctor.findById(doctorId)
 	}
 }

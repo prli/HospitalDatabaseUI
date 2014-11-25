@@ -12,8 +12,16 @@ class PatientController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Patient.list(params), model:[patientInstanceCount: Patient.count()]
+		String userId = "PatientLi"
+		def patient = Patient.findById(userId)
+		def patientRecords = Visitation_record.findAllByPatient(patient)
+		render(view:"index",  model:[patientInstance: patient, visitation_recordInstanceList: patientRecords, patientRecordsInstanceCount: patientRecords.size()])
     }
+	
+	def filterRecordsByDate(Date startdate, Date endDate){
+		//change visitation_recordInstanceList for that it is filtered
+		render(view:"index",  model:[patientInstance: patient, visitation_recordInstanceList: patientRecords, patientRecordsInstanceCount: patientRecords.size()])
+	}
 
     def show(Patient patientInstance) {
         respond patientInstance

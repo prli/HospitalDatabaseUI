@@ -103,18 +103,16 @@
 			</ul>
 		</div>
 		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
-
+			
 			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
+				<h2>Available Functions:</h2>
 				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
+					<li><g:link controller="doctor">Signed in as doctor</g:link></li>
+					<li><g:link controller="patient">Signed in as patient</g:link></li>
+					<li><g:link controller="staff">Signed in as staff</g:link></li>
+					<li><g:link controller="financial_officer">Signed in as financial officer</g:link></li>
+					<li><g:link controller="appointment">See all appointments</g:link></li>
+					<li><g:link controller="visitation_record">See all visitation records</g:link></li>
 				</ul>
 			</div>
 		</div>

@@ -16,45 +16,50 @@
 			</ul>
 		</div>
 		<div id="list-financial_officer" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Financial Officer Profile</h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
-			<thead>
-					<tr>
-						<g:sortableColumn property="userId" title="${message(code: 'financial_officer.userId.label', default: 'User Id')}" />
-					
-						<g:sortableColumn property="firstName" title="${message(code: 'financial_officer.firstName.label', default: 'First Name')}" />
-					
-						<g:sortableColumn property="lastName" title="${message(code: 'financial_officer.lastName.label', default: 'Last Name')}" />
-					
-						<g:sortableColumn property="password" title="${message(code: 'financial_officer.password.label', default: 'Password')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="">
-						<td><g:link action="show" id="${financialOfficerInstance.id}">${financialOfficerInstance.id}</g:link></td>
-						<td>${financialOfficerInstance.firstName}</td>
-						<td>${financialOfficerInstance.lastName}</td>
-						<td>${financialOfficerInstance.password}</td>
-					</tr>
-				</tbody>
-			</table>
-
+			<div id="FOProfile">
+				<table>
+				<thead>
+						<tr>
+							<g:sortableColumn property="userId" title="${message(code: 'financial_officer.userId.label', default: 'User Id')}" />
+						
+							<g:sortableColumn property="firstName" title="${message(code: 'financial_officer.firstName.label', default: 'First Name')}" />
+						
+							<g:sortableColumn property="lastName" title="${message(code: 'financial_officer.lastName.label', default: 'Last Name')}" />
+						
+							<g:sortableColumn property="password" title="${message(code: 'financial_officer.password.label', default: 'Password')}" />
+						
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="">
+							<td><g:link action="show" id="${financialOfficerInstance.id}">${financialOfficerInstance.id}</g:link></td>
+							<td>${financialOfficerInstance.firstName}</td>
+							<td>${financialOfficerInstance.lastName}</td>
+							<td>${financialOfficerInstance.password}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- end of FOProfile -->
+			<div class="pagination"></div>
 			<div id="searchDoctor">
 				<h1>Search Doctor</h1>
 				<table>
 					<g:formRemote name="searchDoctor" url="[controller: 'financial_officer', action:'searchDoctor']">
-					    <tr><td>Doctor Id: <input name="doctorId" type="text" /></td></tr>
-					    <tr><td>First Name: <input name="firstName" type="text" /></td></tr>
-					    <tr><td>Last Name: <input name="lastName" type="text" /></td></tr>
+					    <tr><td><g:field type="text" name="doctorId" placeholder="Search by doctor user id"/></td></tr>
+					    <tr><td><g:field type="text" name="firstName" placeholder="Search by doctor first name"/></td></tr>
+					    <tr><td><g:field type="text" name="lastName" placeholder="Search by doctor last name"/></td></tr>
 					    <tr><td><g:submitButton name="search" value="search" /></td></tr>
 					</g:formRemote>
 				</table>
 			</div>
+			<!-- end of searchDoctor -->
 			<div id="listOfDoctor">
+				<h1>List of Doctors</h1>
 				<table>
 					<thead>
 							<tr>
@@ -88,10 +93,10 @@
 							</g:each>
 						</tbody>
 					</table>
-				<div class="pagination">
-					<g:paginate total="${doctorInstanceCount ?: 0}" />
-				</div>
+				<div class="pagination"></div>
 			</div>
+			<!-- end of listOfDoctor -->
+			<div class="pagination"></div>
 		</div>
 	</body>
 </html>

@@ -16,54 +16,58 @@
 			</ul>
 		</div>
 		<div id="list-doctor" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1>Doctor Profile</h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
-			<thead>
-					<tr>
-						<g:sortableColumn property="id" title="${message(code: 'doctor.userId.label', default: 'User Id')}" />
-					
-						<g:sortableColumn property="firstName" title="${message(code: 'doctor.firstName.label', default: 'First Name')}" />
-					
-						<g:sortableColumn property="lastName" title="${message(code: 'doctor.lastName.label', default: 'Last Name')}" />
-					
-						<g:sortableColumn property="password" title="${message(code: 'doctor.password.label', default: 'Password')}" />
-					
-						<g:sortableColumn property="revenue" title="${message(code: 'doctor.revenue.label', default: 'Revenue')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="odd">
-					
-						<td><g:link action="show" id="${doctorInstance.id}">${doctorInstance.id}</g:link></td>
-						
-						<td>${doctorInstance.firstName}</td>
-
-						<td>${doctorInstance.lastName}</td>
-					
-						<td>${doctorInstance.password}</td>
-					
-						<td>${doctorInstance.revenue}</td>
-					
-					</tr>
-				</tbody>
-			</table>
-
-			<div id="searchPatient">
-				<h1>Search Patient</h1>
+			<div id="doctorProfile">
 				<table>
-					<g:formRemote name="searchPatient"
-					              url="[controller: 'doctor', action:'searchPatient']">
-					    <tr><td>OHIP: <input name="ohip" type="text" /></td></tr>
-					    <tr><td>SIN: <input name="sin" type="text" /></td></tr>
-					    <tr><td><g:submitButton name="search" value="search" /></td></tr>
-					</g:formRemote>
+				<thead>
+						<tr>
+							<g:sortableColumn property="id" title="${message(code: 'doctor.userId.label', default: 'User Id')}" />
+						
+							<g:sortableColumn property="firstName" title="${message(code: 'doctor.firstName.label', default: 'First Name')}" />
+						
+							<g:sortableColumn property="lastName" title="${message(code: 'doctor.lastName.label', default: 'Last Name')}" />
+						
+							<g:sortableColumn property="password" title="${message(code: 'doctor.password.label', default: 'Password')}" />
+						
+							<g:sortableColumn property="revenue" title="${message(code: 'doctor.revenue.label', default: 'Revenue')}" />
+						
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="odd">
+						
+							<td><g:link action="show" id="${doctorInstance.id}">${doctorInstance.id}</g:link></td>
+							
+							<td>${doctorInstance.firstName}</td>
+	
+							<td>${doctorInstance.lastName}</td>
+						
+							<td>${doctorInstance.password}</td>
+						
+							<td>${doctorInstance.revenue}</td>
+						
+						</tr>
+					</tbody>
 				</table>
 			</div>
+			<!-- end of doctorProfile -->
+			<div class="pagination"></div>
+			<div id="searchPatient">
+				<h1>Search Patient</h1>
+				<table><tbody>
+					<g:formRemote name="searchPatient" url="[controller: 'doctor', action:'searchPatient']">
+							<tr><td><g:field type="text" name="ohip" placeholder ="Search by OHIP"/></td></tr>
+							<tr><td><g:field type="text" name="sin" placeholder ="Search by SIN"/></td></tr>
+					    	<tr><td><g:submitButton name="search" value="search" /></td></tr>
+					</g:formRemote>
+				</tbody></table>
+			</div>
+			<!-- end of searchPatient -->
 			<div id="listOfPatient">
+			<h1>List of Patients</h1>
 				<table>
 					<thead>
 							<tr>
@@ -79,7 +83,7 @@
 								<g:sortableColumn property="lastVisitedDate" title="${message(code: 'patient.lastVisitedDate.label', default: 'Last Visited Date')}" />
 							
 								<g:sortableColumn property="numOfVisits" title="${message(code: 'patient.numOfVisits.label', default: 'Num Of Visits')}" />
-								<td></td>
+								<th>Manage Access</th>
 							</tr>
 					</thead>
 					<tbody>
@@ -110,9 +114,8 @@
 						</g:each>
 					</tbody>
 				</table>
-				<div class="pagination">
-					<g:paginate total="${patientInstanceCount ?: 0}" />
-				</div>
+				<!-- end of listOfPatient -->
+				<div class="pagination"></div>
 			</div>
 		</div>
 	</body>
