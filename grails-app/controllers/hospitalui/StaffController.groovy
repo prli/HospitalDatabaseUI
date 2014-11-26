@@ -32,7 +32,7 @@ class StaffController {
 		} catch (Exception e) {
 			flash.message = e.message
 		}
-		redirect(action:"index")
+		redirect(action:"index", params:[userID:staffId])
 	}
 	
 	@Transactional

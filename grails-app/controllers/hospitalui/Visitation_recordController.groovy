@@ -16,12 +16,12 @@ class Visitation_recordController {
     }
 	
 	def showForDoctorOrStaffOrFO(String doctorId){
-		def records = Visitation_record.findByDoctor(doctorId)
+		def records = Visitation_record.findAllByDoctor(doctorId)
 		render(view:"index",  model:[visitation_recordInstanceList: records, visitation_recordInstanceCount: records.size()])
 	}
 	
 	def showForPatient(String patientId){
-		def records = Visitation_record.findByPatient(patientId)
+		def records = Visitation_record.findAllByPatient(patientId)
 		render(view:"index",  model:[visitation_recordInstanceList: records, visitation_recordInstanceCount: records.size()])
 	}
 	

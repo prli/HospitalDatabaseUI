@@ -122,13 +122,10 @@
 				</tbody></table>
 				<h2>Available Functions:</h2>
 				<ul>
-					<li><g:link controller="doctor">Signed in as doctor</g:link></li>
-					<li><g:link controller="patient">Signed in as patient</g:link></li>
-					<li><g:link controller="staff">Signed in as staff</g:link></li>
-					<li><g:link controller="financial_officer">Signed in as financial officer</g:link></li>
-					<li><g:link controller="appointment">See all appointments</g:link></li>
-					<li><g:link controller="visitation_record">See all visitation records</g:link></li>
-					<li><g:link controller="permission">Manage patient access</g:link></li>
+					<li><g:link controller="doctor" action="create">Create doctor</g:link></li>
+					<li><g:link controller="patient" action="create">Create patient</g:link></li>
+					<li><g:link controller="staff" action="create">Create Staff</g:link></li>
+					<li><g:link controller="financial_officer" action="create">Create Financial Officer</g:link></li>
 				</ul>
 			</div>
 		</div>
