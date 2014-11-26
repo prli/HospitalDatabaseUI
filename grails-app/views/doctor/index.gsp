@@ -61,6 +61,10 @@
 					<g:formRemote name="searchPatient" url="[controller: 'doctor', action:'searchPatient']">
 							<tr><td><g:field type="text" name="ohip" placeholder ="Search by OHIP"/></td></tr>
 							<tr><td><g:field type="text" name="sin" placeholder ="Search by SIN"/></td></tr>
+							<tr><td><g:field type="text" name="homePhone" placeholder ="Search by Phone Number"/></td></tr>
+							<tr><td><g:field type="text" name="healthCondition" placeholder ="Search by Health Condition"/></td></tr>
+							<tr><td><g:field type="text" name="lastVisitedDate" placeholder ="Search by Last Visited Date"/></td></tr>
+							<tr><td><g:field type="text" name="numOfVisits" placeholder ="Search by Number of Visits"/></td></tr>
 					    	<tr><td><g:submitButton name="search" value="search" /></td></tr>
 					</g:formRemote>
 				</tbody></table>

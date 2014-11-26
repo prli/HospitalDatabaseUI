@@ -5,29 +5,26 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Financial_OfficerDAOImpl {
 	
 	Connection conn = null;
 	
-	public boolean ConnectToDB() {
-
+	public Financial_OfficerDAOImpl(){
 		try {
 			//conn = DriverManager.getConnection("jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli", "user_prli", "user_prli");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356_hospital", "root", "root");
-			
+
 		    // Do something with the Connection
 		    System.out.println("Connection to MYSQL Database Sucessful!");
 		    
-		    return true;
-
 		} catch (SQLException ex) {
 		    // handle any errors
 		    System.out.println("SQLException: " + ex.getMessage());
 		    System.out.println("SQLState: " + ex.getSQLState());
 		    System.out.println("VendorError: " + ex.getErrorCode());
 		}
-		return false;
 	}
 	
 	public ResultSet getProfile(String UserId) {
@@ -68,18 +65,56 @@ public class Financial_OfficerDAOImpl {
 		return rs;
 	}
 	
-	public ResultSet getDoctorFromID(String doctorID) {
+	public ArrayList getDoctorFromInput(String doctorID, String firstName, String lastName) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 		    stmt = (this.conn).createStatement();
-		    rs = stmt.executeQuery("SELECT * FROM Person WHERE PatientId ='" + doctorID + "'");
-		    rs = stmt.getResultSet();
+		    
+		   StringBuffer query = new StringBuffer();
+		   
+		   boolean input = false;
+		   
+		   query.append("SELECT P.UserId, P.FirstName, P.LastName, P.Password, D.Revenue FROM Person P INNER JOIN Doctor D ON P.UserId = D.UserId WHERE ");
+		   if (doctorID != "") {
+			   query.append("D.UserId = '" + doctorID + "'");
+			   input = true;
+		   }
+		   if (firstName != "") {
+			   if (input == true) {
+				   query.append(" AND ");
+			   }
+			   query.append("P.FirstName = '" + firstName + "'");
+			   input = true;
+		   }
+		   if (lastName != "") {
+			   if (input == true) {
+				   query.append(" AND ");
+			   }
+			   query.append("P.LastName = '" + lastName + "'");
+			   input = true;
+		   }
+		   
+		   if (input == true) {
+			   rs = stmt.executeQuery(query.toString()); 
+		   }
+		   else {
+			   rs = stmt.executeQuery("SELECT P.UserId, P.FirstName, P.LastName, P.Password, D.Revenue FROM Person P INNER JOIN Doctor D ON P.UserId = D.UserId");
+		   }
+		   rs = stmt.getResultSet();
 		    
 		    // Now do something with the ResultSet ....
+		   ArrayList doctors = new ArrayList();
 		    while (rs.next()) {
-		    	System.out.println("Doctor name is "  + rs.getString("FirstName") + " " + rs.getString("LastName"));
+		    	Doctor d = new Doctor();
+		    	d.setId(rs.getString("UserId"));
+		    	d.setFirstName(rs.getString("FirstName"));
+		    	d.setLastName(rs.getString("LastName"));
+		    	d.setPassword(rs.getString("Password"));
+		    	d.setRevenue(rs.getDouble("Revenue"));
+		    	doctors.add(d);
 		    }
+		    return doctors;
 		}
 		catch (SQLException ex) {
 		    // handle any errors
@@ -103,7 +138,7 @@ public class Financial_OfficerDAOImpl {
 			        stmt = null;
 			    }
 		}
-		return rs;
+		return null;
 	}
 	
 	public ResultSet getAssignedPatientsList(String beginDate, String endDate, String doctorID) {
@@ -114,19 +149,18 @@ public class Financial_OfficerDAOImpl {
 		    
 		    // need to handle if user put 
 		    if (beginDate != null && endDate != null) {
-		    	rs = stmt.executeQuery("SELECT P.FirstName, P.LastName, V.Date_of_visit FROM Person P, Visitation_Record V WHERE UserId IN (SELECT UserId FROM Patient WHERE DoctorId = '" + doctorID + "') AND '" + beginDate +" 00:00:00' <= V.Date_of_visit AND V.Date_of_visit <= '"+ endDate +" 23:59:59' ORDER BY V.Date_of_visit DESC");
+		    	rs = stmt.executeQuery("SELECT P.FirstName, P.LastName, V.PatientId, V.Date_of_visit FROM Person P INNER JOIN Visitation_Record V ON P.UserId = V.PatientId WHERE P.UserId IN (SELECT UserId FROM Patient WHERE DoctorId = '" + doctorID + "') AND '" + beginDate +" 00:00:00' <= V.Date_of_visit AND V.Date_of_visit <= '"+ endDate +" 23:59:59' ORDER BY V.Date_of_visit DESC");
 			    rs = stmt.getResultSet();
 		    }
 		    else {
-		    	rs = stmt.executeQuery("SELECT P.FirstName, P.LastName, V.Date_of_visit FROM Person P, Visitation_Record V WHERE UserId IN (SELECT UserId FROM Patient WHERE DoctorId = '" + doctorID + "') ORDER BY V.Date_of_visit DESC");
+		    	rs = stmt.executeQuery("SELECT P.FirstName, P.LastName, V.PatientId, V.Date_of_visit FROM Person P INNER JOIN Visitation_Record V ON P.UserId = V.PatientId WHERE P.UserId IN (SELECT UserId FROM Patient WHERE DoctorId = '" + doctorID + "') ORDER BY V.Date_of_visit DESC");
 			    rs = stmt.getResultSet();
 		    }
 		    
 		    // Now do something with the ResultSet ....
 		    int iter = 1;
 		    while (rs.next()) {
-		    	System.out.println("Patient [" + iter + "] : " + rs.getString("FirstName") + " " + rs.getString("LastName") + " Visit time is " + rs.getString("Date_of_visit"));
-		    	//System.out.println("Doctor name is "  + rs.getString("FirstName") + " " + rs.getString("LastName"));
+		    	System.out.println("Patient [" + iter + "] : " + rs.getString("FirstName") + " " + rs.getString("LastName") + " " + rs.getString("patientId") + " - Visit time is " + rs.getString("Date_of_visit"));
 		    	iter++;
 		    }
 		}

@@ -12,7 +12,7 @@ class DoctorController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def userId = "PeiLi"
+		def userId = "DennisSo"
 		def patients = Patient.findAllByDoctor(Doctor.findById(userId))
 		def doctor = Doctor.findById(userId)
         render(view: "index", model: [patientInstanceCount: patients.size() , doctorInstance: doctor, patientInstanceList: patients])
@@ -20,10 +20,16 @@ class DoctorController {
 	
 	def searchPatient(){
 		DoctorDAOImpl dao = new DoctorDAOImpl()
-		String ohip = params.ohip;
-		String sin = params.sin;
-		def patients = dao.getPatient("PeiLi","","",sin,"",ohip,"");
-		render(view: "index", model: [doctorInstanceCount: Doctor.count(), doctorInstanceList: Doctor.list(params), patientInstanceList: patients])
+		def userId = "DennisSo"
+		def doctor = Doctor.findById(userId)
+		String ohip = params.ohip
+		String sin = params.sin
+		String homePhone = params.homePhone
+		String healthCondition = params.healthCondition
+		String lastVisitedDate = params.lastVisitedDate
+		String numOfVisits = params.numOfVisits
+		def patients = dao.getPatient(userId, homePhone, lastVisitedDate, sin, numOfVisits, ohip, healthCondition);
+		render(view: "index", model: [doctorInstanceCount: Doctor.count(), doctorInstanceList: Doctor.list(params), patientInstanceList: patients, doctorInstance: doctor])
 	}
 
     def show(Doctor doctorInstance) {

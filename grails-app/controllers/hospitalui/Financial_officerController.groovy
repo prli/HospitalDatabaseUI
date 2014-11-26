@@ -12,7 +12,7 @@ class Financial_officerController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def userId = "FOLi"
+		def userId = "DougHarder"
 		def financialOfficer = Financial_officer.findById(userId)
 		def doctors = Doctor.list(params)
         render(view: "index", model: [financialOfficerInstance: financialOfficer, doctorInstanceList: doctors, doctorInstanceList: Doctor.list(params)])
@@ -23,8 +23,11 @@ class Financial_officerController {
 		String doctorId = params.doctorId;
 		String firstName = params.firstName;
 		String lastName = params.lastName;
-		def doctors = dao.getDoctor();
-		render(view: "index", model: [doctorInstanceCount: Doctor.count(), doctorInstanceList: Doctor.list(params), doctorInstanceList: doctors])
+		def userId = "DougHarder"
+		def financialOfficer = Financial_officer.findById(userId)
+		//def doctors = dao.getDoctor();
+		def doctors = dao.getDoctorFromInput(doctorId, firstName, lastName);
+		render(view: "index", model: [doctorInstanceCount: Doctor.count(), doctorInstanceList: Doctor.list(params), doctorInstanceList: doctors, financialOfficerInstance: financialOfficer])
 	}
 
     def show(Financial_officer financial_officerInstance) {
