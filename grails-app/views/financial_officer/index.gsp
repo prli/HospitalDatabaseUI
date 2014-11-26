@@ -39,7 +39,7 @@
 							<td><g:link action="show" id="${financialOfficerInstance.id}">${financialOfficerInstance.id}</g:link></td>
 							<td>${financialOfficerInstance.firstName}</td>
 							<td>${financialOfficerInstance.lastName}</td>
-							<td>${financialOfficerInstance.password}</td>
+							<td><g:field type="password" name="password" disabled="" value="${fieldValue(bean: financialOfficerInstance, field: 'password')}"/></td>
 						</tr>
 					</tbody>
 				</table>
@@ -68,9 +68,7 @@
 								<g:sortableColumn property="firstName" title="${message(code: 'doctor.firstName.label', default: 'First Name')}" />
 							
 								<g:sortableColumn property="lastName" title="${message(code: 'doctor.lastName.label', default: 'Last Name')}" />
-							
-								<g:sortableColumn property="password" title="${message(code: 'doctor.password.label', default: 'Password')}" />
-							
+														
 								<g:sortableColumn property="revenue" title="${message(code: 'doctor.revenue.label', default: 'Revenue')}" />
 							
 							</tr>
@@ -84,9 +82,7 @@
 								<td>${doctorInstance.firstName}</td>
 		
 								<td>${doctorInstance.lastName}</td>
-							
-								<td>${doctorInstance.password}</td>
-							
+														
 								<td>${doctorInstance.revenue}</td>
 							
 							</tr>

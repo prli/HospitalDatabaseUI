@@ -30,15 +30,19 @@
 							<th>${message(code: 'staff.firstName.label', default: 'First Name')}</th>			
 							<th>${message(code: 'staff.lastName.label', default: 'Last Name')}</th>		
 							<th>${message(code: 'staff.password.label', default: 'Password')}</th>
-						
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="">
-							<td><g:link action="show" id="${staffInstance.id}">${fieldValue(bean: staffInstance, field: "id")}</g:link></td>
-							<td>${fieldValue(bean: staffInstance, field: "firstName")}</td>
-							<td>${fieldValue(bean: staffInstance, field: "lastName")}</td>
-							<td>${fieldValue(bean: staffInstance, field: "password")}</td>
+							<g:form url="[resource:staffInstance, action:'editStaff']">
+								<g:hiddenField name="staffId" value="${staffInstance.id }"/>
+								<td>${fieldValue(bean: staffInstance, field: 'id')}</td>
+								<td><g:field type="text" name="firstName" value="${fieldValue(bean: staffInstance, field: 'firstName')}"/></td>
+								<td><g:field type="text" name="lastName" value="${fieldValue(bean: staffInstance, field: 'lastName')}"/></td>
+								<td><g:field type="password" name="password" value="${fieldValue(bean: staffInstance, field: 'password')}"/></td>
+								<td><g:actionSubmit controller="staff" class="edit" action="editStaff" value="Save edit"/></td>
+							</g:form>
 						</tr>
 					</tbody>
 				</table>
@@ -46,7 +50,9 @@
 					<g:each in="${staffDoctorListInstance}" status="i" var="doctorInstance">
 						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 							<td><g:link class="delete" action="removeDoctor" params="[doctorId:"${doctorInstance.id}", staffId:"${staffInstance.id }"]" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >${message(code: 'default.button.delete.label', default: 'Delete')}</</g:link></td>
-							<td><g:link action="show" id="${doctorInstance.id}">WORKS FOR ${fieldValue(bean: doctorInstance, field: "id")}</g:link></td>
+<%--							<td><g:link controller="doctor" action="show" id="${doctorInstance.id}">WORKS FOR ${fieldValue(bean: doctorInstance, field: "id")}</g:link></td>--%>
+														<td>WORKS FOR ${fieldValue(bean: doctorInstance, field: "id")}</td>
+							
 							<td><g:link controller="appointment" action="doctorAppointments" params="[doctorId:"${doctorInstance.id}"]">SET APPOINTMENTS FOR ${fieldValue(bean: doctorInstance, field: "id")}</g:link></td>
 						</tr>
 					</g:each>
@@ -70,6 +76,7 @@
 						<tr>
 							<th>${message(code: 'patient.firstName.label', default: 'First Name')}</th>			
 							<th>${message(code: 'patient.lastName.label', default: 'Last Name')}</th>
+							<td></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -77,6 +84,7 @@
 						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 							<td><g:link controller="patient" action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "firstName")}</g:link></td>
 							<td><g:link controller="patient" action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "lastName")}</g:link></td>
+							<td><g:link controller="visitation_record" action="showForPatient" params ="[patientId: "${patientInstance.id}"]">RECORDS</g:link></td>
 						</tr>
 						</g:each>
 					</tbody>

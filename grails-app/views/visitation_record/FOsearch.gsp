@@ -38,6 +38,7 @@
 			<table>
 			<thead>
 					<tr>
+<%--					<th></th>--%>
 						<g:sortableColumn property="patient" title="${message(code: 'visitation_record.patient.label', default: 'Patient')}" />
 					
 						<g:sortableColumn property="comments" title="${message(code: 'visitation_record.comments.label', default: 'Comments')}" />
@@ -57,9 +58,9 @@
 				<tbody>
 				<g:each in="${visitation_recordInstanceList}" status="i" var="visitation_recordInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link action="show" id="${visitation_recordInstance.patient.id}">${fieldValue(bean: visitation_recordInstance, field: "patient.id")}</g:link></td>
-					
-						<td><g:link action="show" id="${visitation_recordInstance.id}">${fieldValue(bean: visitation_recordInstance, field: "comments")}</g:link></td>
+<%--						<td><g:link controller="visitation_record" action="show" params="[patientId:"${visitation_recordInstance.patient.id }", dateOfVisit:"${visitation_recordInstance.dateOfVisit }"]">EDIT</g:link></td>--%>
+						<td><g:link controller="patient" action="show" id="${visitation_recordInstance.patient.id}">${fieldValue(bean: visitation_recordInstance, field: "patient.id")}</g:link></td>
+						<td>${fieldValue(bean: visitation_recordInstance, field: "comments")}</td>
 					
 						<td>${fieldValue(bean: visitation_recordInstance, field: "costOfVisit")}</td>
 					

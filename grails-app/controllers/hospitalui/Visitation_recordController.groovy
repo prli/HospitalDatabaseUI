@@ -4,6 +4,8 @@ package hospitalui
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 @Transactional(readOnly = true)
 class Visitation_recordController {
@@ -16,16 +18,25 @@ class Visitation_recordController {
     }
 	
 	def showForDoctorOrStaffOrFO(String doctorId){
-		def records = Visitation_record.findAllByDoctor(doctorId)
+		Doctor d = Doctor.findByIt(doctorId)
+		def records = Visitation_record.findAllByDoctor(d)
 		render(view:"index",  model:[visitation_recordInstanceList: records, visitation_recordInstanceCount: records.size()])
 	}
 	
-	def showForPatient(String patientId){
-		def records = Visitation_record.findAllByPatient(patientId)
+	def showForPatient(){
+		String patientId = params.patientId
+		Patient p = Patient.findById(patientId)
+		def records = Visitation_record.findAllByPatient(p)
 		render(view:"index",  model:[visitation_recordInstanceList: records, visitation_recordInstanceCount: records.size()])
 	}
 	
-    def show(Visitation_record visitation_recordInstance) {
+    def show() {
+		Patient patient = Patient.findById(params.patientId)
+		DateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		java.util.Date parsedUtilDate = formater.parse(params.dateOfVisit);
+		java.sql.Date sqlDate= new java.sql.Date(parsedUtilDate.getTime())
+		Date dateOfVisit = sqlDate;
+		Visitation_record visitation_recordInstance = Visitation_record.findByPatientAndDateOfVisit(patient, dateOfVisit)
         respond visitation_recordInstance
     }
 
@@ -73,12 +84,23 @@ class Visitation_recordController {
         }
     }
 
-    def edit(Visitation_record visitation_recordInstance) {
+    def edit() {
+		Patient patient = Patient.findById(params.patientId)
+		DateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		java.util.Date parsedUtilDate = formater.parse(params.dateOfVisit);
+		java.sql.Date sqlDate= new java.sql.Date(parsedUtilDate.getTime())
+		Date dateOfVisit = sqlDate;
+		Visitation_record visitation_recordInstance = Visitation_record.findByPatientAndDateOfVisit(patient, dateOfVisit)
         respond visitation_recordInstance
     }
 
     @Transactional
-    def update(Visitation_record visitation_recordInstance) {
+    def update() {
+		Patient patient = Patient.findById(params.patient.id)
+		Date dateOfVisit = params.dateOfVisit;
+		Visitation_record visitation_recordInstance = new Visitation_record(id:[patient,dateOfVisit])
+		println visitation_recordInstance.id
+		visitation_recordInstance = Visitation_record.findByPatientAndDateOfVisit(patient, dateOfVisit)
         if (visitation_recordInstance == null) {
             notFound()
             return
@@ -101,8 +123,13 @@ class Visitation_recordController {
     }
 
     @Transactional
-    def delete(Visitation_record visitation_recordInstance) {
-
+    def delete() {
+		Patient patient = Patient.findById(params.patientId)
+		DateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		java.util.Date parsedUtilDate = formater.parse(params.dateOfVisit);
+		java.sql.Date sqlDate= new java.sql.Date(parsedUtilDate.getTime())
+		Date dateOfVisit = sqlDate;
+		Visitation_record visitation_recordInstance = Visitation_record.findByPatientAndDateOfVisit(patient, dateOfVisit)
         if (visitation_recordInstance == null) {
             notFound()
             return

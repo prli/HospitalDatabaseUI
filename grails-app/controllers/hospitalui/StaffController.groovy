@@ -46,7 +46,7 @@ class StaffController {
 		} catch (Exception e) {
 			flash.message = e.message
 		}
-		redirect(action:"index")
+		redirect(action:"index", params:[userID:staffId])
 	}
 	
     def show(Staff staffInstance) {
@@ -81,7 +81,20 @@ class StaffController {
             '*' { respond staffInstance, [status: CREATED] }
         }
     }
-
+	
+	@Transactional
+	def editStaff() {
+		String staffId = params.staffId
+		println staffId
+		Staff staff = Person.findById(staffId)
+		staff.firstName = params.firstName
+		staff.lastName = params.lastName
+		staff.password = params.password
+		staff.save flush:true
+		flash.message = "changed"
+		redirect(action:"index", params:[userID:staffId])
+	}
+	
     def edit(Staff staffInstance) {
         respond staffInstance
     }

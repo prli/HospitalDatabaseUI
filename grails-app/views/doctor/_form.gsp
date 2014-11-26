@@ -23,8 +23,7 @@
 		<g:message code="doctor.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" required="" value="${doctorInstance?.password}"/>
-
+	<g:field type="password" name="password" value="${fieldValue(bean: doctorInstance, field: 'password')}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: doctorInstance, field: 'revenue', 'error')} required">
@@ -32,7 +31,7 @@
 		<g:message code="doctor.revenue.label" default="Revenue" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="revenue" value="${fieldValue(bean: doctorInstance, field: 'revenue')}" required=""/>
+	<g:textField name="revenue" value="${doctorInstance?.revenue}" required=""/>
 
 </div>
 

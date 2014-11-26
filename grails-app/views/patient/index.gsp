@@ -108,7 +108,7 @@
 							<td>${fieldValue(bean: visitation_recordInstance, field: "costOfVisit")}</td>
 						
 							<td>
-								<g:link action="show" params="[patient: "${visitation_recordInstance.patient}", dateOfVisit: "${visitation_recordInstance.dateOfVisit}"]">
+								<g:link controller="visitation_record" action="show" params="[patientId: "${visitation_recordInstance.patient.id}", dateOfVisit: "${visitation_recordInstance.dateOfVisit}"]">
 									<g:formatDate date="${visitation_recordInstance.dateOfVisit}" />
 								</g:link>
 							</td>
@@ -127,7 +127,7 @@
 			<!-- end of patientRecords -->
 			<div class="pagination"></div>
 			<div id="patientAppointments">
-				<h1>Patient Appointments</h1>
+<%--				<h1>Patient Appointments</h1>--%>
 			</div>
 			<!-- end of patientAppointments -->
 		</div>

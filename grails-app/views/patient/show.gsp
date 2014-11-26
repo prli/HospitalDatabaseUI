@@ -107,7 +107,7 @@
 				<li class="fieldcontain">
 					<span id="password-label" class="property-label"><g:message code="patient.password.label" default="Password" /></span>
 					
-						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${patientInstance}" field="password"/></span>
+						<span class="property-value" aria-labelledby="password-label"><g:field disabled="" type="password" name="password" value="${fieldValue(bean: patientInstance, field: 'password')}"/></span>
 					
 				</li>
 				</g:if>
@@ -119,6 +119,49 @@
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
+			
+			<table>
+			<thead>
+					<tr>
+<%--					<th></th>--%>
+						<g:sortableColumn property="patient" title="${message(code: 'visitation_record.patient.label', default: 'Patient')}" />
+					
+						<g:sortableColumn property="comments" title="${message(code: 'visitation_record.comments.label', default: 'Comments')}" />
+					
+						<g:sortableColumn property="costOfVisit" title="${message(code: 'visitation_record.costOfVisit.label', default: 'Cost Of Visit')}" />
+					
+						<g:sortableColumn property="dateOfVisit" title="${message(code: 'visitation_record.dateOfVisit.label', default: 'Date Of Visit')}" />
+					
+						<g:sortableColumn property="diagnosis" title="${message(code: 'visitation_record.diagnosis.label', default: 'Diagnosis')}" />
+					
+						<th><g:message code="visitation_record.doctor.label" default="Doctor" /></th>
+					
+						<g:sortableColumn property="lengthOfVisit" title="${message(code: 'visitation_record.lengthOfVisit.label', default: 'Length Of Visit')}" />
+					
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${visitation_recordInstanceList}" status="i" var="visitation_recordInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+<%--						<td><g:link controller="visitation_record" action="show" params="[patientId:"${visitation_recordInstance.patient.id }", dateOfVisit:"${visitation_recordInstance.dateOfVisit }"]">EDIT</g:link></td>--%>
+						<td><g:link controller="patient" action="show" id="${visitation_recordInstance.patient.id}">${fieldValue(bean: visitation_recordInstance, field: "patient.id")}</g:link></td>
+						<td>${fieldValue(bean: visitation_recordInstance, field: "comments")}</td>
+					
+						<td>${fieldValue(bean: visitation_recordInstance, field: "costOfVisit")}</td>
+					
+						<td><g:formatDate date="${visitation_recordInstance.dateOfVisit}" /></td>
+					
+						<td>${fieldValue(bean: visitation_recordInstance, field: "diagnosis")}</td>
+					
+						<td>${fieldValue(bean: visitation_recordInstance, field: "doctor.id")}</td>
+					
+						<td>${fieldValue(bean: visitation_recordInstance, field: "lengthOfVisit")}</td>
+					
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+			
 		</div>
 	</body>
 </html>

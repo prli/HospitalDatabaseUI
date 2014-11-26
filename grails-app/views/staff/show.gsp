@@ -54,7 +54,7 @@
 				<li class="fieldcontain">
 					<span id="password-label" class="property-label"><g:message code="staff.password.label" default="Password" /></span>
 					
-						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${staffInstance}" field="password"/></span>
+						<span class="property-value" aria-labelledby="password-label"><g:field disabled="" type="password" name="password" value="${fieldValue(bean: staffInstance, field: 'password')}"/></span>
 					
 				</li>
 				</g:if>

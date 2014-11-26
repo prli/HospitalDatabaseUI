@@ -87,7 +87,6 @@
 		<g:message code="patient.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" required="" value="${patientInstance?.password}"/>
-
+	<g:field type="password" name="password" value="${fieldValue(bean: patientInstance, field: 'password')}"/>
 </div>
 

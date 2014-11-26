@@ -116,7 +116,7 @@
 				<table><tbody>
 					<g:formRemote name="loginForm" url="[controller: 'login', action:'loginSubmit']">
 							<tr><td><g:field type="text" name="userID" placeholder ="Username"/></td></tr>
-							<tr><td><g:field type="text" name="password" placeholder ="Password"/></td></tr>
+							<tr><td><g:field type="password" name="password" placeholder ="Password"/></td></tr>
 					    	<tr><td><g:submitButton name="Login" value="Login" /></td></tr>
 					</g:formRemote>
 				</tbody></table>

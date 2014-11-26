@@ -26,7 +26,8 @@ class PatientController {
 	}
 
     def show(Patient patientInstance) {
-        respond patientInstance
+		def records = Visitation_record.findAllByPatient(patientInstance)
+        render(view:"show",model:[patientInstance:patientInstance, visitation_recordInstanceList:records])
     }
 
     def create() {

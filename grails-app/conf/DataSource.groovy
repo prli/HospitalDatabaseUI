@@ -18,9 +18,12 @@ environments {
     development {
         dataSource {
             //dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli"
-			username = "user_prli"
-			password = "user_prli"
+//            url = "jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli"
+//			username = "user_prli"
+//			password = "user_prli"
+			url = "jdbc:mysql://localhost:3306/ece356db_prli"
+			username = "root"
+			password = "root"
         }
     }
     test {

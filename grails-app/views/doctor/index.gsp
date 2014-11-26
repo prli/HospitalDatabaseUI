@@ -45,7 +45,7 @@
 	
 							<td>${doctorInstance.lastName}</td>
 						
-							<td>${doctorInstance.password}</td>
+							<td><g:field type="password" name="password" value="${fieldValue(bean: doctorInstance, field: 'password')}"/></td>
 						
 							<td>${doctorInstance.revenue}</td>
 						

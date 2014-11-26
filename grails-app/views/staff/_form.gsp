@@ -34,7 +34,7 @@
 		<g:message code="staff.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" required="" value="${staffInstance?.password}"/>
+	<g:field type="password" name="password" value="${fieldValue(bean: staffInstance, field: 'password')}"/>
 
 </div>
 
