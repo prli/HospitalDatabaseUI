@@ -49,4 +49,12 @@ class Visitation_record implements Serializable{
 		builder.append patient
 		builder.toHashCode()
 	}
+	
+	public void setDoctorById(String doctorId){
+		this.doctor = Doctor.findById(doctorId)
+	}
+	
+	public void setPatientById(String patientId){
+		this.doctor = Patient.findById(patientId)
+	}
 }
