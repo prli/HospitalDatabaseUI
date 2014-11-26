@@ -14,7 +14,7 @@ public class DoctorDAOImpl {
 	public DoctorDAOImpl(){
 		try {
 			//conn = DriverManager.getConnection("jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli", "user_prli", "user_prli");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356_hospital", "root", "root");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356db_prli", "root", "root");
 
 		    // Do something with the Connection
 		    System.out.println("Connection to MYSQL Database Sucessful!");
@@ -25,6 +25,131 @@ public class DoctorDAOImpl {
 		    System.out.println("SQLState: " + ex.getSQLState());
 		    System.out.println("VendorError: " + ex.getErrorCode());
 		}
+	}
+	
+	public boolean addDoctorForStaff(String doctorId, String staffId) throws SQLException{
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+		    stmt = (this.conn).createStatement();
+
+		    int rows = stmt.executeUpdate("insert into staff values ('" + staffId + "','" + doctorId + "')");
+		    return rows>0?true:false;
+		}
+		catch (SQLException ex) {
+		    // handle any errors
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			throw ex;
+		}
+		finally {	
+			if (rs != null) {
+			    try {
+			        rs.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			    rs = null;
+			}
+			if (stmt != null) {
+			    try {
+			        stmt.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			        stmt = null;
+			    }
+		}
+	}
+	
+public boolean removeDoctorForStaff(String doctorId, String staffId) throws SQLException{
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+		    stmt = (this.conn).createStatement();
+
+		    int rows = stmt.executeUpdate("delete from staff where UserId ='" + staffId + "' AND DoctorId = '" + doctorId + "'" );
+		    return rows>0?true:false;
+		}
+		catch (SQLException ex) {
+		    // handle any errors
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			throw ex;
+		}
+		finally {	
+			if (rs != null) {
+			    try {
+			        rs.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			    rs = null;
+			}
+			if (stmt != null) {
+			    try {
+			        stmt.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			        stmt = null;
+			    }
+		}
+	}
+
+	public ArrayList getPatientListByDoctor(String doctorId){
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+		    stmt = (this.conn).createStatement();
+
+		    rs = stmt.executeQuery("select P.UserId, P.FirstName, P.LastName, "+
+									"PA.OHIP, PA.SIN, PA.Phone, PA.DoctorId, PA.Current_health, PA.Last_visit_date, PA.Num_of_visits "+
+									"from Person P inner join Patient PA on P.UserId = PA.UserId "+
+									"where P.UserId in (select UserId from Patient where '" + doctorId + "' = DoctorId) "+
+									"OR P.UserId in (select PatientId from Permission where '" + doctorId + "' = GranteeId)");
+		    rs = stmt.getResultSet();
+		    
+		    // Now do something with the ResultSet ....
+		    //System.out.println("Finding records from " + beginDate + " to " + endDate + " given ID of " + patientID);
+		    int iter = 1;
+		    ArrayList patientList = new ArrayList();
+		    while (rs.next()) {
+		    	Patient p = new Patient();
+		    	p.setId(rs.getString("UserId"));
+		    	p.setFirstName(rs.getString("FirstName"));
+		    	p.setLastName(rs.getString("LastName"));
+		    	patientList.add(p);
+			    iter++;
+		    }
+		    return patientList;
+		}
+		catch (SQLException ex) {
+		    // handle any errors
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+		}
+		finally {	
+			if (rs != null) {
+			    try {
+			        rs.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			    rs = null;
+			}
+			if (stmt != null) {
+			    try {
+			        stmt.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			        stmt = null;
+			    }
+		}
+		return null;
 	}
 	
 	public ResultSet getProfile(String UserId) {

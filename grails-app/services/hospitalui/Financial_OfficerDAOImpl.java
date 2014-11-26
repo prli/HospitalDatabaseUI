@@ -14,7 +14,7 @@ public class Financial_OfficerDAOImpl {
 	public Financial_OfficerDAOImpl(){
 		try {
 			//conn = DriverManager.getConnection("jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli", "user_prli", "user_prli");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356_hospital", "root", "root");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356db_prli", "root", "root");
 
 		    // Do something with the Connection
 		    System.out.println("Connection to MYSQL Database Sucessful!");

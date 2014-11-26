@@ -72,6 +72,7 @@ class AppointmentController {
 				Patient patient = Patient.findById(appointmentInstance.patient.id)
 				String doctorId = patient.doctor.id
 				redirect (action: "doctorAppointments", params: [doctorId: doctorId])
+
             }
             '*' { respond appointmentInstance, [status: CREATED] }
         }

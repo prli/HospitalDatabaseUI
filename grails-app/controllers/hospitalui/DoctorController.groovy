@@ -15,8 +15,9 @@ class DoctorController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 		userID = params.userID
-		def patients = Patient.findAllByDoctor(Doctor.findById(userID))
 		def doctor = Doctor.findById(userID)
+		DoctorDAOImpl dao = new DoctorDAOImpl()
+		def patients = dao.getPatientListByDoctor(userID)
         render(view: "index", model: [patientInstanceCount: patients.size() , doctorInstance: doctor, patientInstanceList: patients])
     }
 	

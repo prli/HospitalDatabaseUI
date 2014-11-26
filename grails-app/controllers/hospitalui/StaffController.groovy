@@ -16,10 +16,39 @@ class StaffController {
         params.max = Math.min(max ?: 10, 100)
 		userID = params.userID
 		def staff = Staff.findById(userID)
-		def staffDoctorList = Staff.findAllById(userID)
-        render(view:"index", model:[staffInstance: staff, staffDoctorListInstance: staffDoctorList])
+		PatientDAOImpl dao = new PatientDAOImpl()
+		def staffDoctorList = dao.getDoctorListByStaff(userID)
+		def patientListInstance = dao.getPatientListByStaff(userID)
+        render(view:"index", model:[staffInstance: staff, staffDoctorListInstance: staffDoctorList, patientListInstance: patientListInstance])
     }
 
+	def addDoctor(){
+		String doctorId = params.doctorId
+		String staffId = params.staffId
+		DoctorDAOImpl dao = new DoctorDAOImpl()
+		try {
+			boolean success = dao.addDoctorForStaff(doctorId, staffId)
+			flash.message = "added"
+		} catch (Exception e) {
+			flash.message = e.message
+		}
+		redirect(action:"index")
+	}
+	
+	@Transactional
+	def removeDoctor(){
+		String doctorId = params.doctorId
+		String staffId = params.staffId
+		DoctorDAOImpl dao = new DoctorDAOImpl()
+		try {
+			boolean success = dao.removeDoctorForStaff(doctorId, staffId)
+			flash.message = "deleted"
+		} catch (Exception e) {
+			flash.message = e.message
+		}
+		redirect(action:"index")
+	}
+	
     def show(Staff staffInstance) {
         respond staffInstance
     }

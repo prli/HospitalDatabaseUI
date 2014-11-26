@@ -13,6 +13,7 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link controller="patient" class="create" action="create">New Patient</g:link></li>
 			</ul>
 		</div>
 		<div id="list-staff" class="content scaffold-list" role="main">
@@ -42,13 +43,22 @@
 					</tbody>
 				</table>
 				<table>
-					<g:each in="${staffDoctorListInstance}" status="i" var="staffInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></td>
-						<td><g:link action="show" id="${staffInstance.id}">WORKS FOR ${fieldValue(bean: staffInstance, field: "doctor.id")}</g:link></td>
-						<td><g:link controller="appointment" action="doctorAppointments" params="[doctorId:"${staffInstance.doctor.id}"]">SET APPOINTMENTS FOR ${fieldValue(bean: staffInstance, field: "doctor.id")}</g:link></td>
-					</tr>
+					<g:each in="${staffDoctorListInstance}" status="i" var="doctorInstance">
+						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							<td><g:link class="delete" action="removeDoctor" params="[doctorId:"${doctorInstance.id}", staffId:"${staffInstance.id }"]" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >${message(code: 'default.button.delete.label', default: 'Delete')}</</g:link></td>
+							<td><g:link action="show" id="${doctorInstance.id}">WORKS FOR ${fieldValue(bean: doctorInstance, field: "id")}</g:link></td>
+							<td><g:link controller="appointment" action="doctorAppointments" params="[doctorId:"${doctorInstance.id}"]">SET APPOINTMENTS FOR ${fieldValue(bean: doctorInstance, field: "id")}</g:link></td>
+						</tr>
 					</g:each>
+						<tr>
+							<td>
+								<g:form url="[resource:staffInstance, action:'addDoctor']" method="POST">
+									<g:hiddenField name="staffId" value="${staffInstance.id }"/>
+									<g:select id="doctor" name="doctorId" from="${hospitalui.Doctor.list()}" optionKey="id" required="" value="" class="many-to-one"/>
+									<g:actionSubmit controller="staff" class="create" action="addDoctor" value="${message(code: 'default.button.addDoctor.label', default: 'Add doctor')}"/>
+								</g:form>
+							</td>
+						</tr>
 				</table>
 			</div>
 			<!-- end of staffProfile -->
@@ -65,8 +75,8 @@
 					<tbody>
 						<g:each in="${patientListInstance}" status="i" var="patientInstance">
 						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-							<td><g:link action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "firstName")}</g:link></td>
-							<td><g:link action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "lastName")}</g:link></td>
+							<td><g:link controller="patient" action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "firstName")}</g:link></td>
+							<td><g:link controller="patient" action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "lastName")}</g:link></td>
 						</tr>
 						</g:each>
 					</tbody>
