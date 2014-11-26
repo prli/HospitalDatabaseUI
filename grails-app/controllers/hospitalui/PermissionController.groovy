@@ -1,7 +1,5 @@
 package hospitalui
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -28,11 +26,17 @@ class PermissionController {
 		render(view: "index", model:[permissionInstanceList: allowedDoctors])
 	}
 	
+	@Transactional
 	def removePermission(){
-		Patient patient = params.patient
-		Doctor doctor = params.grantee 
+		System.out.println("hdfdfdfdfh")
+		String patientId = params.patientId
+		String doctorId = params.granteeId
+		Patient patient = Patient.findById(patientId)
+		Doctor doctor = Doctor.findById(doctorId)
+		Permission permissionInstance = Permission.findByPatientAndGrantee(patient, doctor)
 		permissionInstance.delete flush:true
-		render()
+		def allowedDoctors = Permission.findAllByPatient(patient)
+		redirect(action: "index", params: [permissionInstanceCount: Permission.count(), permissionInstanceList: allowedDoctors])
 	}
 
     def create() {
