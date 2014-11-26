@@ -24,7 +24,7 @@
 				<table>
 					<thead>
 							<tr>
-								<th><g:message code="person.userId.label" default="User Id" /></th>
+								<th><g:message code="person.userID.label" default="User Id" /></th>
 								<th><g:message code="person.firstName.label" default="First Name" /></th>
 								<th><g:message code="person.lastName.label" default="Last Name" /></th>
 							</tr>

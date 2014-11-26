@@ -24,7 +24,7 @@
 				<table>
 				<thead>
 						<tr>
-							<th>${message(code: 'financial_officer.userId.label', default: 'User Id')}</th>
+							<th>${message(code: 'financial_officer.userID.label', default: 'User Id')}</th>
 						
 							<th>${message(code: 'financial_officer.firstName.label', default: 'First Name')}</th>
 						
@@ -63,7 +63,7 @@
 				<table>
 					<thead>
 							<tr>
-								<g:sortableColumn property="id" title="${message(code: 'doctor.userId.label', default: 'User Id')}" />
+								<g:sortableColumn property="id" title="${message(code: 'doctor.userID.label', default: 'User Id')}" />
 							
 								<g:sortableColumn property="firstName" title="${message(code: 'doctor.firstName.label', default: 'First Name')}" />
 							

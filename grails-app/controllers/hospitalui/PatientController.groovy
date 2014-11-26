@@ -10,10 +10,12 @@ class PatientController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	String userID
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		String userId = "PatientLi"
-		def patient = Patient.findById(userId)
+		userID = params.userID
+		Patient patient = Patient.findById(userID)
 		def patientRecords = Visitation_record.findAllByPatient(patient)
 		render(view:"index",  model:[patientInstance: patient, visitation_recordInstanceList: patientRecords, patientRecordsInstanceCount: patientRecords.size()])
     }

@@ -9,26 +9,27 @@ import grails.transaction.Transactional
 class DoctorController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	String userID
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def userId = "DennisSo"
-		def patients = Patient.findAllByDoctor(Doctor.findById(userId))
-		def doctor = Doctor.findById(userId)
+		userID = params.userID
+		def patients = Patient.findAllByDoctor(Doctor.findById(userID))
+		def doctor = Doctor.findById(userID)
         render(view: "index", model: [patientInstanceCount: patients.size() , doctorInstance: doctor, patientInstanceList: patients])
     }
 	
 	def searchPatient(){
 		DoctorDAOImpl dao = new DoctorDAOImpl()
-		def userId = "DennisSo"
-		def doctor = Doctor.findById(userId)
+		def doctor = Doctor.findById(userID)
 		String ohip = params.ohip
 		String sin = params.sin
 		String homePhone = params.homePhone
 		String healthCondition = params.healthCondition
 		String lastVisitedDate = params.lastVisitedDate
 		String numOfVisits = params.numOfVisits
-		def patients = dao.getPatient(userId, homePhone, lastVisitedDate, sin, numOfVisits, ohip, healthCondition);
+		def patients = dao.getPatient(userID, homePhone, lastVisitedDate, sin, numOfVisits, ohip, healthCondition);
 		render(view: "index", model: [doctorInstanceCount: Doctor.count(), doctorInstanceList: Doctor.list(params), patientInstanceList: patients, doctorInstance: doctor])
 	}
 
