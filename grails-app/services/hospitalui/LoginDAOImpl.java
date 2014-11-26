@@ -39,9 +39,10 @@ public class LoginDAOImpl {
 		   rs = stmt.getResultSet();
 		   while (rs.next()) {
 			   if (rs.getString("UserId").toString().equals(loginID)) {
+				   System.out.println("UserID OK");
 			   }
 			   if (rs.getString("Password").toString().equals(Password)) {
-				   
+				   System.out.println("Password OK");
 			   }
 			   if (rs.getString("UserId").toString().equals(loginID) && rs.getString("Password").toString().equals(Password)) {
 				   credOK = true;
