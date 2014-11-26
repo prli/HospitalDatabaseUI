@@ -9,12 +9,14 @@ import grails.transaction.Transactional
 class StaffController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+	
+	String userID
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def userId = "staffli"
-		def staff = Staff.findById(userId)
-		def staffDoctorList = Staff.findAllById(userId)
+		userID = params.userID
+		def staff = Staff.findById(userID)
+		def staffDoctorList = Staff.findAllById(userID)
         render(view:"index", model:[staffInstance: staff, staffDoctorListInstance: staffDoctorList])
     }
 

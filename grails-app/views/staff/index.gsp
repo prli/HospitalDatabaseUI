@@ -25,7 +25,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th>${message(code: 'staff.userId.label', default: 'User Id')}</th>
+							<th>${message(code: 'staff.userID.label', default: 'User Id')}</th>
 							<th>${message(code: 'staff.firstName.label', default: 'First Name')}</th>			
 							<th>${message(code: 'staff.lastName.label', default: 'Last Name')}</th>		
 							<th>${message(code: 'staff.password.label', default: 'Password')}</th>
