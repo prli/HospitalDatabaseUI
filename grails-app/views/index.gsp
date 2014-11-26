@@ -113,6 +113,7 @@
 					<li><g:link controller="financial_officer">Signed in as financial officer</g:link></li>
 					<li><g:link controller="appointment">See all appointments</g:link></li>
 					<li><g:link controller="visitation_record">See all visitation records</g:link></li>
+					<li><g:link controller="permission">Manage patient access</g:link></li>
 				</ul>
 			</div>
 		</div>

@@ -24,15 +24,15 @@
 				<table>
 				<thead>
 						<tr>
-							<g:sortableColumn property="id" title="${message(code: 'doctor.userId.label', default: 'User Id')}" />
+							<th>${message(code: 'doctor.userId.label', default: 'User Id')}</th>
 						
-							<g:sortableColumn property="firstName" title="${message(code: 'doctor.firstName.label', default: 'First Name')}" />
+							<th>${message(code: 'doctor.firstName.label', default: 'First Name')}</th>
 						
-							<g:sortableColumn property="lastName" title="${message(code: 'doctor.lastName.label', default: 'Last Name')}" />
+							<th>${message(code: 'doctor.lastName.label', default: 'Last Name')}</th>
 						
-							<g:sortableColumn property="password" title="${message(code: 'doctor.password.label', default: 'Password')}" />
+							<th>${message(code: 'doctor.password.label', default: 'Password')}</th>
 						
-							<g:sortableColumn property="revenue" title="${message(code: 'doctor.revenue.label', default: 'Revenue')}" />
+							<th>${message(code: 'doctor.revenue.label', default: 'Revenue')}</th>
 						
 						</tr>
 					</thead>
@@ -76,8 +76,10 @@
 					<thead>
 							<tr>
 							
-								<g:sortableColumn property="ohip" title="${message(code: 'patient.ohip.label', default: 'Ohip')}" />
-							
+								<g:sortableColumn property="id" title="${message(code: 'patient.id.label', default: 'User Id')}" />
+								<g:sortableColumn property="firstName" title="${message(code: 'patient.firstName.label', default: 'First Name')}" />
+								<g:sortableColumn property="lastName" title="${message(code: 'patient.lastName.label', default: 'Last Name')}" />
+								<g:sortableColumn property="ohip" title="${message(code: 'patient.ohip.label', default: 'Ohip')}" />							
 								<g:sortableColumn property="sin" title="${message(code: 'patient.sin.label', default: 'Sin')}" />
 							
 								<g:sortableColumn property="homePhone" title="${message(code: 'patient.homePhone.label', default: 'Home Phone')}" />
@@ -94,8 +96,12 @@
 						<g:each in="${patientInstanceList}" status="i" var="patientInstance">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 							
-								<td><g:link controller="patient" action="show" id="${patientInstance.id}">${fieldValue(bean: patientInstance, field: "ohip")}</g:link></td>
+								<td><g:link controller="patient" action="show" id="${patientInstance.id}"><g:fieldValue bean="${patientInstance}" field="id" /></g:link></td>
+								<td><g:fieldValue bean="${patientInstance}" field="firstName" /></td>
+								<td><g:fieldValue bean="${patientInstance}" field="lastName" /></td>
 							
+								<td><g:fieldValue bean="${patientInstance}" field="ohip" /></td>
+															
 								<td>${fieldValue(bean: patientInstance, field: "sin")}</td>
 							
 								<td>${fieldValue(bean: patientInstance, field: "homePhone")}</td>
@@ -107,7 +113,7 @@
 								<td>${fieldValue(bean: patientInstance, field: "numOfVisits")}</td>
 								
 								<td>
-									<g:formRemote name="modifyAccess" url="[controller: 'permission', action:'index']">
+									<g:formRemote name="modifyAccess" url="[controller: 'permission', action:'managePatientAccess']">
 										<g:hiddenField name="patientId" value="${patientInstance.id}" />
 										<g:hiddenField name="doctorId" value="${doctorInstance.id}" />
 										<g:submitButton name="modifyAccess" value="modify access" />

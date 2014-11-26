@@ -24,13 +24,13 @@
 				<table>
 				<thead>
 						<tr>
-							<g:sortableColumn property="userId" title="${message(code: 'financial_officer.userId.label', default: 'User Id')}" />
+							<th>${message(code: 'financial_officer.userId.label', default: 'User Id')}</th>
 						
-							<g:sortableColumn property="firstName" title="${message(code: 'financial_officer.firstName.label', default: 'First Name')}" />
+							<th>${message(code: 'financial_officer.firstName.label', default: 'First Name')}</th>
 						
-							<g:sortableColumn property="lastName" title="${message(code: 'financial_officer.lastName.label', default: 'Last Name')}" />
+							<th>${message(code: 'financial_officer.lastName.label', default: 'Last Name')}</th>
 						
-							<g:sortableColumn property="password" title="${message(code: 'financial_officer.password.label', default: 'Password')}" />
+							<th>${message(code: 'financial_officer.password.label', default: 'Password')}</th>
 						
 						</tr>
 					</thead>
