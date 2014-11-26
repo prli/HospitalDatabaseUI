@@ -14,7 +14,7 @@ public class DoctorDAOImpl {
 	public DoctorDAOImpl(){
 		try {
 			//conn = DriverManager.getConnection("jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli", "user_prli", "user_prli");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356db_prli", "root", "root");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356_hospital", "root", "root");
 
 		    // Do something with the Connection
 		    System.out.println("Connection to MYSQL Database Sucessful!");
@@ -77,7 +77,7 @@ public class DoctorDAOImpl {
 		   
 		   boolean input = false;
 		   
-		   query.append("SELECT OHIP, SIN, Phone, Current_health, Last_visit_date, Num_of_visits FROM Patient where DoctorId = '" + doctorID + "'");
+		   query.append("SELECT P.UserId, P.FirstName, P.LastName, PA.OHIP, PA.SIN, PA.Phone, PA.Current_health, PA.Last_visit_date, PA.Num_of_visits FROM Patient PA left join Person P on Pa.UserId = P.UserId where DoctorId = '" + doctorID + "'");
 		   if (Phone != "") {
 			   query.append(" AND Phone = '" + Phone + "'");
 			   input = true;
@@ -107,7 +107,7 @@ public class DoctorDAOImpl {
 			   rs = stmt.executeQuery(query.toString());
 		   }
 		   else {
-			   rs = stmt.executeQuery("SELECT OHIP, SIN, Phone, Current_health, Last_visit_date, Num_of_visits FROM Patient where DoctorId = '" + doctorID + "'");
+			   rs = stmt.executeQuery("SELECT P.UserId, P.FirstName, P.LastName, PA.OHIP, PA.SIN, PA.Phone, PA.Current_health, PA.Last_visit_date, PA.Num_of_visits FROM Patient PA left join Person P on Pa.UserId = P.UserId where DoctorId = '" + doctorID + "'");
 		   }
 		   rs = stmt.getResultSet();
 		    
@@ -115,6 +115,9 @@ public class DoctorDAOImpl {
 		   ArrayList patients = new ArrayList();
 		    while (rs.next()) {
 		    	Patient p = new Patient();
+		    	p.setId(rs.getString("UserId"));
+		    	p.setFirstName(rs.getString("FirstName"));
+		    	p.setLastName(rs.getString("LastName"));
 		    	p.setHomePhone(rs.getString("Phone"));
 		    	p.setLastVisitedDate(rs.getDate("Last_visit_date"));
 		    	p.setSin(rs.getString("SIN"));

@@ -31,6 +31,11 @@ public class LoginDAOImpl {
 		ResultSet rs = null;
 		try {
 		    stmt = (this.conn).createStatement();
+		    
+		    if (loginID == "" || password == "") {
+		    	System.out.println("bad credentials");
+		    	return null;
+		    }
 		   
 		   boolean credOK = false;
 		   
@@ -38,10 +43,10 @@ public class LoginDAOImpl {
 		   rs = stmt.getResultSet();
 		   while (rs.next()) {
 			   if (rs.getString("UserId").toString().equals(loginID)) {
-				   System.out.println("UserID OK");
+				   //System.out.println("UserID OK");
 			   }
 			   if (rs.getString("Password").toString().equals(password)) {
-				   System.out.println("Password OK");
+				   //System.out.println("Password OK");
 			   }
 			   if (rs.getString("UserId").toString().equals(loginID) && rs.getString("Password").toString().equals(password)) {
 				   credOK = true;
@@ -57,7 +62,6 @@ public class LoginDAOImpl {
 				   while (rs.next()) {
 					   String userID = rs.getString("UserId");
 					   if (rs.getString("UserId").toString().equals(loginID)) {
-						   System.out.println("Person is Doctor");
 						   matched = true;
 						   Doctor doc = new Doctor();
 						   doc.setId(userID);
@@ -71,7 +75,6 @@ public class LoginDAOImpl {
 				   while (rs.next()) {
 					   String userID = rs.getString("UserId");
 					   if (rs.getString("UserId").toString().equals(loginID)) {
-						   System.out.println("Person is FO");
 						   matched = true;
 						   Financial_officer fo = new Financial_officer();
 						   fo.setId(userID);
@@ -85,7 +88,6 @@ public class LoginDAOImpl {
 				   while (rs.next()) {
 					   String userID = rs.getString("UserId");
 					   if (rs.getString("UserId").toString().equals(loginID)) {
-						   System.out.println("Person is Patient");
 						   matched = true;
 						   Patient patient = new Patient();
 						   patient.setId(userID);
@@ -99,7 +101,6 @@ public class LoginDAOImpl {
 				   while (rs.next()) {
 					   String userID = rs.getString("UserId");
 					   if (rs.getString("UserId").toString().equals(loginID)) {
-						   System.out.println("Person is Staff");
 						   matched = true;
 						   Staff staff = new Staff();
 						   staff.setId(userID);

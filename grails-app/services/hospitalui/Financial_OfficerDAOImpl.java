@@ -75,7 +75,7 @@ public class Financial_OfficerDAOImpl {
 		   
 		   boolean input = false;
 		   
-		   query.append("SELECT P.UserId, P.FirstName, P.LastName, P.Password, D.Revenue FROM Person P INNER JOIN Doctor D ON P.UserId = D.UserId WHERE ");
+		   query.append("Select D.UserId, P.FirstName, P.LastName, P.Password, IFNULL(sum(V.Cost_of_visit),0) AS Revenue from Person P INNER JOIN Doctor D on P.UserId = D.UserId LEFT JOIN Visitation_Record V on D.UserId = V.DoctorId WHERE ");
 		   if (doctorID != "") {
 			   query.append("D.UserId = '" + doctorID + "'");
 			   input = true;
@@ -94,12 +94,13 @@ public class Financial_OfficerDAOImpl {
 			   query.append("P.LastName = '" + lastName + "'");
 			   input = true;
 		   }
+		   query.append(" Group by D.UserId");
 		   
 		   if (input == true) {
 			   rs = stmt.executeQuery(query.toString()); 
 		   }
 		   else {
-			   rs = stmt.executeQuery("SELECT P.UserId, P.FirstName, P.LastName, P.Password, D.Revenue FROM Person P INNER JOIN Doctor D ON P.UserId = D.UserId");
+			   rs = stmt.executeQuery("Select D.UserId, P.FirstName, P.LastName, P.Password, IFNULL(sum(V.Cost_of_visit),0) AS Revenue from Person P INNER JOIN Doctor D on P.UserId = D.UserId LEFT JOIN Visitation_Record V on D.UserId = V.DoctorId Group by D.UserId;");
 		   }
 		   rs = stmt.getResultSet();
 		    

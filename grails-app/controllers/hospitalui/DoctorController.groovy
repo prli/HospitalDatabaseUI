@@ -23,6 +23,8 @@ class DoctorController {
 	def searchPatient(){
 		DoctorDAOImpl dao = new DoctorDAOImpl()
 		def doctor = Doctor.findById(userID)
+		String firstName = params.firstName
+		String lastName = params.lastName
 		String ohip = params.ohip
 		String sin = params.sin
 		String homePhone = params.homePhone
