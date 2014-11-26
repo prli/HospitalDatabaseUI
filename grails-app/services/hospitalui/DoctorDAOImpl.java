@@ -14,7 +14,7 @@ public class DoctorDAOImpl {
 	public DoctorDAOImpl(){
 		try {
 			//conn = DriverManager.getConnection("jdbc:mysql://eceweb.uwaterloo.ca:3306/ece356db_prli", "user_prli", "user_prli");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356_hospital", "root", "root");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ece356db_prli", "root", "root");
 
 		    // Do something with the Connection
 		    System.out.println("Connection to MYSQL Database Sucessful!");
@@ -197,4 +197,53 @@ public class DoctorDAOImpl {
 		}
 		return rs;
 	}
+
+	public ArrayList getFutureAppointments(String doctorId){
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+		    stmt = (this.conn).createStatement();
+		    
+		    // need to handle if user put 
+	    	rs = stmt.executeQuery("Select A.PatientId, A.Date_Time, A.Duration, A.Status from Appointment as A left Join Patient as P on A.PatientId = P.UserId where P.DoctorId = '" + doctorId + "' AND A.Date_Time >= current_time");
+		    rs = stmt.getResultSet();
+		    
+		    // Now do something with the ResultSet ....
+		    int iter = 1;
+		    ArrayList appointments = new ArrayList();
+		    while (rs.next()) {
+		    	Appointment a = new Appointment();
+		    	a.setPatientById(rs.getString("PatientId"));
+		    	a.setStartTime(rs.getDate("Date_Time"));
+		    	a.setDuration(rs.getInt("Duration"));
+		    	a.setStatus(rs.getString("Status"));
+		    	appointments.add(a);
+		    }
+		    return appointments;
+		}
+		catch (SQLException ex) {
+		    // handle any errors
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+		}
+		finally {	
+			if (rs != null) {
+			    try {
+			        rs.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			    rs = null;
+			}
+			if (stmt != null) {
+			    try {
+			        stmt.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			        stmt = null;
+			    }
+		}
+		return null;	
+		}
 }

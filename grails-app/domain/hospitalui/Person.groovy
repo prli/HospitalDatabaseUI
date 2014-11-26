@@ -6,6 +6,7 @@ class Person {
 	String firstName;
 	String lastName;
 	String password;
+	boolean isActive
 	
     static constraints = {
     }
@@ -18,5 +19,6 @@ class Person {
 		firstName column: 'FirstName'
 		lastName column: 'LastName'
 		password column: 'Password'
+		isActive column: 'IsActive'
 	}
 }

@@ -12,7 +12,10 @@ class StaffController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Staff.list(params), model:[staffInstanceCount: Staff.count()]
+		def userId = "staffli"
+		def staff = Staff.findById(userId)
+		def staffDoctorList = Staff.findAllById(userId)
+        render(view:"index", model:[staffInstance: staff, staffDoctorListInstance: staffDoctorList])
     }
 
     def show(Staff staffInstance) {
@@ -26,6 +29,7 @@ class StaffController {
     @Transactional
     def save(Staff staffInstance) {
 		staffInstance.id = staffInstance.firstName + staffInstance.lastName
+		staffInstance.isActive = true
         if (staffInstance == null) {
             notFound()
             return
@@ -76,13 +80,13 @@ class StaffController {
 
     @Transactional
     def delete(Staff staffInstance) {
-
+		staffInstance.isActive = false
         if (staffInstance == null) {
             notFound()
             return
         }
 
-        staffInstance.delete flush:true
+        staffInstance.save flush:true
 
         request.withFormat {
             form multipartForm {

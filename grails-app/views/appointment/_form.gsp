@@ -5,9 +5,8 @@
 <div class="fieldcontain ${hasErrors(bean: appointmentInstance, field: 'duration', 'error')} required">
 	<label for="duration">
 		<g:message code="appointment.duration.label" default="Duration" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="duration" type="number" value="${appointmentInstance.duration}" required=""/>
+	<g:field name="duration" type="number" value="${appointmentInstance?.duration}"/>
 
 </div>
 
@@ -16,7 +15,7 @@
 		<g:message code="appointment.patient.label" default="Patient" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="patient" name="patient.id" from="${hospitalui.Patient.list()}" optionKey="id" required="" value="${appointmentInstance?.patient?.id}" class="many-to-one"/>
+	<g:select id="patient" name="patient.id" from="${patientInstanceList}" optionKey="id" value="${appointmentInstance?.patient?.id}" class="many-to-one"/>
 
 </div>
 
@@ -32,9 +31,8 @@
 <div class="fieldcontain ${hasErrors(bean: appointmentInstance, field: 'status', 'error')} required">
 	<label for="status">
 		<g:message code="appointment.status.label" default="Status" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="status" required="" value="${appointmentInstance?.status}"/>
+	<g:textField name="status" value="${appointmentInstance?.status}"/>
 
 </div>
 
