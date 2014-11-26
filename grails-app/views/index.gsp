@@ -1,3 +1,4 @@
+<%@ page import="hospitalui.LoginController" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -82,7 +83,7 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
+		<!--<div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>
 				<li>App version: <g:meta name="app.version"/></li>
@@ -101,10 +102,22 @@
 					<li>${plugin.name} - ${plugin.version}</li>
 				</g:each>
 			</ul>
-		</div>
+		</div> -->
 		<div id="page-body" role="main">
 			
+
 			<div id="controller-list" role="navigation">
+			
+				<h1>Gotham General Hospital</h1>
+				<table><tbody>
+					<g:formRemote name="loginForm" url="[controller: 'login', action:'loginSubmit']">
+							<tr><td><g:field type="text" name="userID" placeholder ="Username"/></td></tr>
+							<tr><td><g:field type="text" name="password" placeholder ="Password"/></td></tr>
+					    	<tr><td><g:submitButton name="Login" value="Login" /></td></tr>
+					</g:formRemote>
+				</tbody></table>
+			
+			
 				<h2>Available Functions:</h2>
 				<ul>
 					<li><g:link controller="doctor">Signed in as doctor</g:link></li>
@@ -116,6 +129,22 @@
 					<li><g:link controller="permission">Manage patient access</g:link></li>
 				</ul>
 			</div>
+			
+			<!-- Login Form 
+			<div id="Login">
+				<h1>Login Header</h1>
+				<table><tbody>
+					<g:formRemote name="loginForm" url="[controller: 'login', action:'loginSubmit']">
+							<tr><td><g:field type="text" name="userID" placeholder ="Username"/></td></tr>
+							<tr><td><g:field type="text" name="pass" placeholder ="Password"/></td></tr>
+					    	<tr><td><g:submitButton name="Login" value="LoginButtonText" /></td></tr>
+					</g:formRemote>
+				</tbody></table>
+			</div>
+			 Login Form -->
+
+			
+			
 		</div>
 	</body>
 </html>
