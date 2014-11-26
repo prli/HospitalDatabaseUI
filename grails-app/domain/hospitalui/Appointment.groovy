@@ -21,5 +21,9 @@ class Appointment implements Serializable{
 		startTime column: 'Date_Time'
 		duration column: 'Duration'
 		status column: 'Status'
+	}
+
+	public void setPatientById(String patientId) {
+		this.patient = Patient.findById(patientId)
 	}
 }

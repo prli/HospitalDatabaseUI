@@ -14,17 +14,28 @@ class AppointmentController {
         params.max = Math.min(max ?: 10, 100)
         respond Appointment.list(params), model:[appointmentInstanceCount: Appointment.count()]
     }
+	
+	def doctorAppointments(){
+		String doctorId = params.doctorId
+		Doctor doctor = Doctor.findById(doctorId)
+		DoctorDAOImpl dao = new DoctorDAOImpl()
+		def appointments = dao.getFutureAppointments(doctorId)
+		render(view: "index", model:[futureAppointmentInstanceList: appointments, doctorInstance: doctor])
+	}
 
     def show(Appointment appointmentInstance) {
         respond appointmentInstance
     }
 
-    def create() {
-        respond new Appointment(params)
+    def create(String doctorId) {
+		Doctor doctor = Doctor.findById(doctorId)
+		def patientInstanceList = Patient.findAllByDoctor(doctor)
+        render(view: "create", model: [patientInstanceList: patientInstanceList])
     }
 
     @Transactional
     def save(Appointment appointmentInstance) {
+		appointmentInstance.id = ""
         if (appointmentInstance == null) {
             notFound()
             return
