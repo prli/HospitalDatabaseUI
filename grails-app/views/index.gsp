@@ -110,6 +110,9 @@
 		<div id="page-body" role="main">
 			<div id="controller-list" role="navigation">
 				<h1>Gotham General Hospital</h1>
+				<g:if test="${flash.message}">
+					<div class="message" role="status">${flash.message}</div>
+				</g:if>
 				<table><tbody>
 					<g:formRemote name="loginForm" url="[controller: 'login', action:'loginSubmit']">
 							<tr><td><g:field type="text" name="userID" placeholder ="Username"/></td></tr>

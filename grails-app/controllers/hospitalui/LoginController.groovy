@@ -43,7 +43,8 @@ class LoginController {
 		}
 		else
 		{
-			// Incorrect UserID or password
+			flash.message = "Incorrect username or password"
+			redirect(uri:"/", params:[error:"error"])
 		}
 	}
 }
