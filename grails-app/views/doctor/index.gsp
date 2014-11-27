@@ -95,8 +95,8 @@
 					<tbody>
 						<g:each in="${patientInstanceList}" status="i" var="patientInstance">
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-							
-								<td><g:link controller="patient" action="show" id="${patientInstance.id}"><g:fieldValue bean="${patientInstance}" field="id" /></g:link></td>
+								<g:hiddenField name="doctorId" value="${doctorInstance.id}" />
+								<td><g:link controller="Visitation_record" action="DocResult" id="${patientInstance.id}" params="[doctorId:"${userID}"]"><g:fieldValue bean="${patientInstance}" field="id" /></g:link></td>
 								<td><g:fieldValue bean="${patientInstance}" field="firstName" /></td>
 								<td><g:fieldValue bean="${patientInstance}" field="lastName" /></td>
 							

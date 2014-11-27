@@ -58,7 +58,20 @@ class Visitation_recordController {
 		def result = Visitation_record.findAllByDoctorAndDateOfVisitBetween(doc, start, end.plus(1))
 		render(view:"FOsearch",  model:[doctorInstance: doc, visitation_recordInstanceList: result, visitation_recordInstanceCount: Visitation_record.count()])
 //		render(view: "FOsearch", model: [doctorInstanceCount: Doctor.count(), doctorInstanceList: Doctor.list(params), doctorInstanceList: doctors, financialOfficerInstance: financialOfficer])
-	} 
+	}
+	def DocResult(Patient patientInstance){
+//		String test = toString(patientInstance.id)
+		
+		DoctorDAOImpl dao = new DoctorDAOImpl()
+//		System.out.println(dao.getDocIdFromPatId("joker"));
+		Doctor doc = Doctor.findById(dao.getDocIdFromPatId(patientInstance.id))
+		
+//		def test = params.doctorId
+		
+		def records = Visitation_record.findAllByPatientAndDoctor(patientInstance, doc)
+//		def records = Visitation_record.findAllByPatient(patientInstance)
+		render(view:"docSearch",  model:[visitation_recordInstanceList: records, visitation_recordInstanceCount: Visitation_record.count()])
+	}
 
     @Transactional
     def save(Visitation_record visitation_recordInstance) {

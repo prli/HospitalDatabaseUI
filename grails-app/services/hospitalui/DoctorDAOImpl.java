@@ -374,4 +374,51 @@ public boolean removeDoctorForStaff(String doctorId, String staffId) throws SQLE
 		}
 		return null;	
 		}
+//	test
+	public String getDocIdFromPatId(String PatId) {
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		String DocId = null;
+		
+		try {
+		    stmt = (this.conn).createStatement();
+		    rs = stmt.executeQuery("select DoctorId from Patient where UserId ='" + PatId + "'");
+		    rs = stmt.getResultSet();
+		    System.out.println("select DoctorId from Patient where UserId ='" + PatId + "'"); 
+		    System.out.println(rs);
+//		    System.out.println(rs.getString("DoctorId"));
+		    // Now do something with the ResultSet ....
+		    while (rs.next()) {
+		     DocId = rs.getString("DoctorId");
+		    }
+		     System.out.println("select DoctorId from Patient where UserId ='" + PatId + "'"); 
+		     System.out.println(DocId);
+		    
+		    return DocId;
+		}
+		catch (SQLException ex) {
+		    // handle any errors
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+		}
+		finally {	
+			if (rs != null) {
+			    try {
+			        rs.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			    rs = null;
+			}
+			if (stmt != null) {
+			    try {
+			        stmt.close();
+			    } catch (SQLException sqlEx) {} // ignore
+			
+			        stmt = null;
+			    }
+		}
+		return DocId;
+	}
 }
